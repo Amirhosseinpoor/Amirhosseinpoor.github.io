@@ -13,7 +13,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-
   <style>
     :root{
       --bg:#0b1220;           /* Night palette (locked) */
@@ -58,21 +57,16 @@
     .nav ul{display:flex;gap:14px;margin-left:auto;list-style:none}
     .nav ul a{color:var(--muted);padding:8px 12px;border-radius:12px;transition:.2s ease}
     .nav ul a:hover{color:var(--text);background:var(--chip-bg)}
-.logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.9rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  color: #f5f7fa; /* light grayish white */
-  text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.logo:hover {
-  color: #4fc3f7; /* soft blue accent */
-  transform: scale(1.03);
-}
-
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: #f5f7fa;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .logo:hover { color:#4fc3f7; transform:scale(1.03); }
 
     .container{max-width:var(--maxw);margin:0 auto;padding:22px;position:relative;z-index:1}
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:70px 0 40px}
@@ -80,10 +74,9 @@
     .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(167,139,250,0.16);border:1px solid var(--card-border);color:var(--text);font-size:12px}
     h1{font-size:clamp(32px,5vw,52px);line-height:1.07;margin:14px 0 12px}
     .lead{color:var(--muted);font-size:clamp(15px,1.9vw,18px)} 
-
     .quick{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 
-    /* iOS-like glassy buttons (gloss, blur, subtle inner/outer shadows) */
+    /* iOS-like glassy buttons */
     .btn{
       position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:8px;
       padding:10px 14px; border-radius:12px; color:var(--text);
@@ -99,7 +92,7 @@
       background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%);
       transform:translateY(0); pointer-events:none; mix-blend-mode:screen; opacity:.7;
     }
-    .btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.35)}
+    .btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.45)}
     .btn:active{transform:translateY(0); box-shadow:0 2px 12px rgba(0,0,0,.35)}
 
     .hero-visual{aspect-ratio:1/1;border-radius:var(--radius);position:relative;overflow:hidden;border:1px solid var(--card-border);box-shadow:var(--shadow)}
@@ -131,11 +124,50 @@
 
     .thumb{display:block;width:100%;height:180px;object-fit:cover;object-position:center;border-radius:14px;margin-bottom:12px;border:1px solid var(--card-border);background:var(--bg-soft)}
 
-    #projects .card{display:flex;flex-direction:column}
-    #projects .card .quick{margin-top:auto;padding-top: 14px;}
-    #projects .card .quick .btn{align-self:flex-start}
+    /* ---------- Projects: compact, readable, toggleable ---------- */
+    #projects .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:1100px){ #projects .grid{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:680px){  #projects .grid{grid-template-columns:1fr} }
+    #projects .card{display:flex;flex-direction:column;gap:10px}
+    #projects .thumb{height:170px;object-fit:cover;border-radius:14px;border:1px solid var(--card-border)}
+    #projects h3{margin:6px 0 2px;font-size:18px;line-height:1.25}
+    #projects .meta{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 2px}
+    #projects .chip{font-size:12px;padding:5px 9px}
+
+    .proj-desc{
+      color:var(--text);
+      position:relative;
+      line-height:1.55;
+      max-height:calc(1.55em * 5);  /* ~5 lines */
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp:5;
+      -webkit-box-orient:vertical;
+      transition:max-height .25s ease;
+    }
+    .proj-desc.expanded{ -webkit-line-clamp:unset; max-height:9999px; }
+    .fade-tail{ position:relative; }
+    .fade-tail::after{
+      content:"";
+      position:absolute; left:0; right:0; bottom:0; height:48px;
+      background:linear-gradient(transparent, rgba(11,18,32,.92));
+      pointer-events:none; border-bottom-left-radius:var(--radius); border-bottom-right-radius:var(--radius);
+      display:block;
+    }
+    .toggle-wrap{display:flex;gap:10px;align-items:center;margin-top:6px}
+    .toggle-btn{
+      cursor:pointer; user-select:none;
+      padding:8px 10px; border-radius:10px;
+      border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
+      color:var(--text); font-size:13px;
+      backdrop-filter:saturate(160%) blur(10px);
+    }
+    .toggle-btn:hover{box-shadow:0 6px 18px rgba(0,0,0,.35)}
+    #projects .quick{margin-top:auto; padding-top:6px}
   </style>
 </head>
+
 <body class="content">
   <div class="particles" id="particles"></div>
 
@@ -186,107 +218,151 @@
       </div>
     </section>
 
-    <!-- Projects -->
+    <!-- Projects (reworked for readability; texts unchanged) -->
     <section id="projects">
       <h2 class="reveal">Selected Projects</h2>
       <div class="grid">
+
+        <!-- Occupational Medicine Platform -->
         <article class="card reveal">
           <img class="thumb" src="proj-occupational-medicine.jpg" alt="Occupational Medicine Platform thumbnail"/>
           <h3>Occupational Medicine Platform</h3>
-          <p>I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report. Employees and physicians submit digital forms and lab PDFs; a VLM+OCR module (Beagle-14B) extracts biomarkers and normalizes them to JSON, which an orchestrator LLM routes to task-specific predictors (SVM, XGBoost, MLP) for risks such as hypertension, diabetes, CVD, and anemia. The resulting profile triggers two agents: one maps conditions to specialties and crawls verified physician directories to surface nearby, insurance-compatible referrals; the other consults a curated pharmacology knowledge base and checks online/local availability. A reporter agent uses RAG over a FAISS vector store plus just-in-time web context to generate an evidence-backed report that explains findings, flags thresholds, and recommends next steps. The system runs on Django (RBAC, PostgreSQL) and FastAPI services, with Celery/Redis for async pipelines and Docker for reproducible deployment—designed for accuracy, traceability, and scalable clinic operations.</p>
-<div class="meta">
-  <span class="chip year">2025</span>
-  <span class="chip">VLM</span><span class="chip">OCR</span><span class="chip">LLM</span>
-  <span class="chip">Multi-Agent</span><span class="chip">Corrective RAG</span><span class="chip">LangChain</span><span class="chip">LangGraph</span>
-  <span class="chip">SVM</span><span class="chip">XGBoost</span><span class="chip">MLP</span><span class="chip">Decision Trees</span><span class="chip">Random Forest</span>
-  <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
-  <span class="chip">PostgreSQL</span><span class="chip">FAISS</span><span class="chip">Docker</span>
-  <span class="chip">Gamification</span>
-</div>
-
-          <div class="quick"><a class="btn" href="https://docs.google.com/document/d/111ijh2_R-R2rszDmvnnnFNfP9ARWAPe5zgTvRYva-dA/edit?usp=sharing" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Read More</a></div>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">VLM</span><span class="chip">OCR</span><span class="chip">LLM</span>
+            <span class="chip">Multi-Agent</span><span class="chip">Corrective RAG</span><span class="chip">LangChain</span><span class="chip">LangGraph</span>
+            <span class="chip">SVM</span><span class="chip">XGBoost</span><span class="chip">MLP</span><span class="chip">Decision Trees</span><span class="chip">Random Forest</span>
+            <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
+            <span class="chip">PostgreSQL</span><span class="chip">FAISS</span><span class="chip">Docker</span>
+            <span class="chip">Gamification</span>
+          </div>
+          <p class="proj-desc fade-tail" data-id="p1">
+            I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report. Employees and physicians submit digital forms and lab PDFs; a VLM+OCR module (Beagle-14B) extracts biomarkers and normalizes them to JSON, which an orchestrator LLM routes to task-specific predictors (SVM, XGBoost, MLP) for risks such as hypertension, diabetes, CVD, and anemia. The resulting profile triggers two agents: one maps conditions to specialties and crawls verified physician directories to surface nearby, insurance-compatible referrals; the other consults a curated pharmacology knowledge base and checks online/local availability. A reporter agent uses RAG over a FAISS vector store plus just-in-time web context to generate an evidence-backed report that explains findings, flags thresholds, and recommends next steps. The system runs on Django (RBAC, PostgreSQL) and FastAPI services, with Celery/Redis for async pipelines and Docker for reproducible deployment—designed for accuracy, traceability, and scalable clinic operations.
+          </p>
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-toggle="p1">Read more</button>
+            <a class="btn" href="https://docs.google.com/document/d/111ijh2_R-R2rszDmvnnnFNfP9ARWAPe5zgTvRYva-dA/edit?usp=sharing" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Read More
+            </a>
+          </div>
         </article>
 
+        <!-- ROP Diagnostic Web App -->
         <article class="card reveal">
           <img class="thumb" src="proj-rop.jpg" alt="ROP Diagnostic thumbnail"/>
           <h3>ROP Diagnostic Web App</h3>
-          <p>I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations. Fundus images are processed by a U-Net++ vessel segmentation network (ResNet-18 encoder) followed by three CNN heads: EfficientNet-B4 for Plus disease, EfficientNet-B6 for a 7-class stage classifier, and EfficientNet-B4 for zone estimation. The outputs feed a rule-based decision layer that maps findings to observation or treatment bands. A local Llama 3 model (served via Ollama) employs a RAG framework over a curated ophthalmology corpus stored in FAISS to generate cited, transparent clinical explanations. The system runs on a modular Django + FastAPI backend with PostgreSQL and Docker, designed for accuracy, interpretability, and practical clinical deployment.</p>
-<div class="meta">
-  <span class="chip year">2024</span>
-  <span class="chip">U-Net++</span><span class="chip">EfficientNet-B6</span><span class="chip">EfficientNet-B4</span>
-  <span class="chip">Segmentation</span><span class="chip">Classification</span><span class="chip">RAG</span>
-  <span class="chip">Llama-3 (Local)</span><span class="chip">FAISS</span><span class="chip">Explainable AI</span>
-  <span class="chip">Decision Layer</span><span class="chip">Django</span><span class="chip">FastAPI</span>
-  <span class="chip">PostgreSQL</span><span class="chip">Docker</span>
-</div>
-
-          <div class="quick"><a class="btn" href="https://docs.google.com/document/d/1SSc-_QHBRh611wSVSCWC5q2S5r3POsPiid-YWUOPjI4/edit?usp=sharing" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Read More</a></div>
+          <div class="meta">
+            <span class="chip year">2024</span>
+            <span class="chip">U-Net++</span><span class="chip">EfficientNet-B6</span><span class="chip">EfficientNet-B4</span>
+            <span class="chip">Segmentation</span><span class="chip">Classification</span><span class="chip">RAG</span>
+            <span class="chip">Llama-3 (Local)</span><span class="chip">FAISS</span><span class="chip">Explainable AI</span>
+            <span class="chip">Decision Layer</span><span class="chip">Django</span><span class="chip">FastAPI</span>
+            <span class="chip">PostgreSQL</span><span class="chip">Docker</span>
+          </div>
+          <p class="proj-desc fade-tail" data-id="p2">
+            I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations. Fundus images are processed by a U-Net++ vessel segmentation network (ResNet-18 encoder) followed by three CNN heads: EfficientNet-B4 for Plus disease, EfficientNet-B6 for a 7-class stage classifier, and EfficientNet-B4 for zone estimation. The outputs feed a rule-based decision layer that maps findings to observation or treatment bands. A local Llama 3 model (served via Ollama) employs a RAG framework over a curated ophthalmology corpus stored in FAISS to generate cited, transparent clinical explanations. The system runs on a modular Django + FastAPI backend with PostgreSQL and Docker, designed for accuracy, interpretability, and practical clinical deployment.
+          </p>
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-toggle="p2">Read more</button>
+            <a class="btn" href="https://docs.google.com/document/d/1SSc-_QHBRh611wSVSCWC5q2S5r3POsPiid-YWUOPjI4/edit?usp=sharing" target="_blank">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Read More
+            </a>
+          </div>
         </article>
 
+        <!-- Speech-Driven Motor Control -->
         <article class="card reveal">
           <img class="thumb" src="proj-speech-motor.png" alt="Speech Driven Motor Control thumbnail"/>
           <h3>Speech-Driven Motor Control</h3>
-          <p>I developed a bilingual voice-to-action system that translates natural-language commands into real-time motor control. The pipeline converts spoken or typed English and Persian inputs using Whisper ASR, then parses intent through an optional LLM (GPT-4o-mini) with a rule-based fallback for offline reliability. Commands such as “increase 10%” or “set to 3000” are normalized, resolved mathematically, and clamped to safe RPM limits before being transmitted over serial to an Arduino. The microcontroller executes feedback-driven PWM control with live RPM display on a Nokia 5110 LCD. Built with FastAPI, Python, and an embedded C++ firmware loop, the system demonstrates tight integration between speech processing, language understanding, and low-level hardware control for accessible, voice-driven mechatronics.</p>
-<div class="meta">
-  <span class="chip year">2025</span>
-  <span class="chip">Whisper</span><span class="chip">LLM</span><span class="chip">Intent Recognition</span>
-  <span class="chip">Rule-Based Parsing</span><span class="chip">Natural Language Processing</span>
-  <span class="chip">FastAPI</span><span class="chip">Python</span><span class="chip">Serial Communication</span>
-  <span class="chip">Arduino</span><span class="chip">Embedded Control</span>
-  <span class="chip">Speech Recognition</span><span class="chip">REST API</span>
-  <span class="chip">Asynchronous Backend</span><span class="chip">Docker</span>
-</div>
-
-          <div class="quick"><a class="btn" href="https://github.com/Amirhosseinpoor/ElectricalMachine" target="_blank"><i class="fa-brands fa-github"></i> Read More</a></div>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">Whisper</span><span class="chip">LLM</span><span class="chip">Intent Recognition</span>
+            <span class="chip">Rule-Based Parsing</span><span class="chip">Natural Language Processing</span>
+            <span class="chip">FastAPI</span><span class="chip">Python</span><span class="chip">Serial Communication</span>
+            <span class="chip">Arduino</span><span class="chip">Embedded Control</span>
+            <span class="chip">Speech Recognition</span><span class="chip">REST API</span>
+            <span class="chip">Asynchronous Backend</span><span class="chip">Docker</span>
+          </div>
+          <p class="proj-desc fade-tail" data-id="p3">
+            I developed a bilingual voice-to-action system that translates natural-language commands into real-time motor control. The pipeline converts spoken or typed English and Persian inputs using Whisper ASR, then parses intent through an optional LLM (GPT-4o-mini) with a rule-based fallback for offline reliability. Commands such as “increase 10%” or “set to 3000” are normalized, resolved mathematically, and clamped to safe RPM limits before being transmitted over serial to an Arduino. The microcontroller executes feedback-driven PWM control with live RPM display on a Nokia 5110 LCD. Built with FastAPI, Python, and an embedded C++ firmware loop, the system demonstrates tight integration between speech processing, language understanding, and low-level hardware control for accessible, voice-driven mechatronics.
+          </p>
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-toggle="p3">Read more</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/ElectricalMachine" target="_blank">
+              <i class="fa-brands fa-github"></i> Read More
+            </a>
+          </div>
         </article>
 
+        <!-- Hand Gesture Recognition -->
         <article class="card reveal">
           <img class="thumb" src="proj-gesture.png" alt="Hand Gesture Recognition thumbnail"/>
           <h3>Hand Gesture Recognition</h3>
-          <p>I designed a lightweight, real-time hand-gesture recognition system that enables both media and hardware control without heavy convolutional models. Using MediaPipe Hands to extract 63-dimensional landmark features, the pipeline trains compact temporal networks (LSTM, GRU, RNN, MLP) that automatically select the best architecture based on validation accuracy. The trained model is exported to TensorFlow Lite for on-device inference across two runtimes: (A) a Linux-based VLC controller that maps gestures to play, pause, seek, and volume actions via DBus/MPRIS, and (B) a Raspberry Pi application that controls five LEDs using debounced GPIO signals. The system achieves robust real-time performance and is optimized for portability, low compute cost, and responsiveness in embedded and desktop environments.</p>
-<div class="meta">
-  <span class="chip year">2025</span>
-  <span class="chip">MediaPipe</span><span class="chip">TensorFlow</span><span class="chip">Keras</span>
-  <span class="chip">LSTM</span><span class="chip">GRU</span><span class="chip">MLP</span>
-  <span class="chip">TFLite</span><span class="chip">Gesture Recognition</span><span class="chip">Real-Time Inference</span>
-  <span class="chip">OpenCV</span><span class="chip">Python</span><span class="chip">Raspberry Pi</span>
-  <span class="chip">GPIO</span><span class="chip">VLC Integration</span><span class="chip">DBus/MPRIS</span>
-</div>
-
-          <div class="quick"><a class="btn" href="https://github.com/Amirhosseinpoor/mechat" target="_blank"><i class="fa-brands fa-github"></i> Read More</a></div>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">MediaPipe</span><span class="chip">TensorFlow</span><span class="chip">Keras</span>
+            <span class="chip">LSTM</span><span class="chip">GRU</span><span class="chip">MLP</span>
+            <span class="chip">TFLite</span><span class="chip">Gesture Recognition</span><span class="chip">Real-Time Inference</span>
+            <span class="chip">OpenCV</span><span class="chip">Python</span><span class="chip">Raspberry Pi</span>
+            <span class="chip">GPIO</span><span class="chip">VLC Integration</span><span class="chip">DBus/MPRIS</span>
+          </div>
+          <p class="proj-desc fade-tail" data-id="p4">
+            I designed a lightweight, real-time hand-gesture recognition system that enables both media and hardware control without heavy convolutional models. Using MediaPipe Hands to extract 63-dimensional landmark features, the pipeline trains compact temporal networks (LSTM, GRU, RNN, MLP) that automatically select the best architecture based on validation accuracy. The trained model is exported to TensorFlow Lite for on-device inference across two runtimes: (A) a Linux-based VLC controller that maps gestures to play, pause, seek, and volume actions via DBus/MPRIS, and (B) a Raspberry Pi application that controls five LEDs using debounced GPIO signals. The system achieves robust real-time performance and is optimized for portability, low compute cost, and responsiveness in embedded and desktop environments.
+          </p>
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-toggle="p4">Read more</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/mechat" target="_blank">
+              <i class="fa-brands fa-github"></i> Read More
+            </a>
+          </div>
         </article>
 
+        <!-- VideoFair -->
         <article class="card reveal">
           <img class="thumb" src="proj-videofair.png" alt="VideoFair streaming thumbnail"/>
           <h3>VideoFair — Segmentation Streaming</h3>
-          <p>I developed a video segmentation and streaming platform that performs selective YOLOv8 inference on trimmed time windows and delivers real-time playback via HTTP Live Streaming (HLS). Users upload and segment videos through a Django-based web interface, while asynchronous Celery workers handle heavy GPU tasks for object segmentation, frame overlay rendering, and FFmpeg-based HLS conversion. The modular backend allows easy swapping of weights, codecs, or models and ensures efficient distributed processing. This project demonstrates scalable video AI integration with practical deployment pipelines for multimedia analytics and streaming.</p>
-<div class="meta">
-  <span class="chip year">2025</span>
-  <span class="chip">YOLOv8</span><span class="chip">Computer Vision</span><span class="chip">Segmentation</span>
-  <span class="chip">OpenCV</span><span class="chip">FFmpeg</span><span class="chip">HLS Streaming</span>
-  <span class="chip">Django</span><span class="chip">Celery</span><span class="chip">Redis</span>
-  <span class="chip">Asynchronous Processing</span><span class="chip">Docker</span><span class="chip">Video AI</span>
-</div>
-
-          <div class="quick"><a class="btn" href="https://github.com/Amirhosseinpoor/streamingapp/tree/triming" target="_blank"><i class="fa-brands fa-github"></i> Read More</a></div>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">YOLOv8</span><span class="chip">Computer Vision</span><span class="chip">Segmentation</span>
+            <span class="chip">OpenCV</span><span class="chip">FFmpeg</span><span class="chip">HLS Streaming</span>
+            <span class="chip">Django</span><span class="chip">Celery</span><span class="chip">Redis</span>
+            <span class="chip">Asynchronous Processing</span><span class="chip">Docker</span><span class="chip">Video AI</span>
+          </div>
+          <p class="proj-desc fade-tail" data-id="p5">
+            I developed a video segmentation and streaming platform that performs selective YOLOv8 inference on trimmed time windows and delivers real-time playback via HTTP Live Streaming (HLS). Users upload and segment videos through a Django-based web interface, while asynchronous Celery workers handle heavy GPU tasks for object segmentation, frame overlay rendering, and FFmpeg-based HLS conversion. The modular backend allows easy swapping of weights, codecs, or models and ensures efficient distributed processing. This project demonstrates scalable video AI integration with practical deployment pipelines for multimedia analytics and streaming.
+          </p>
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-toggle="p5">Read more</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/streamingapp/tree/triming" target="_blank">
+              <i class="fa-brands fa-github"></i> Read More
+            </a>
+          </div>
         </article>
 
+        <!-- Modern Control — Ball & Beam -->
         <article class="card reveal">
           <img class="thumb" src="proj-ball-beam.png" alt="Ball and Beam control thumbnail"/>
           <h3>Modern Control — Ball &amp; Beam</h3>
-          <p>I designed and implemented a complete observer-based control system for the classical Ball & Beam experiment using MATLAB and Simulink. Starting from the nonlinear Lagrangian model, I derived and validated the system’s dynamics through both analytical ODEs and Simulink simulations. The model was linearized around its equilibrium, and controllability and observability were verified using rank, PBH, and Jordan tests. A full state-feedback controller was then designed via pole placement to meet time-domain performance criteria (settling time < 3 s, overshoot < 5%), followed by the inclusion of a reference pre-compensator and an integral controller to eliminate steady-state error. Finally, a reduced-order Luenberger observer was designed to estimate unmeasured states, and the integrated observer–controller was tested on the nonlinear system. The final closed-loop system achieved stable, precise tracking and validated the Separation Principle in practice.</p>
-<div class="meta">
-  <span class="chip year">2025</span>
-  <span class="chip">MATLAB</span><span class="chip">Simulink</span>
-  <span class="chip">State-Space Control</span><span class="chip">Pole Placement</span>
-  <span class="chip">Full-State Feedback</span><span class="chip">Integral Control</span>
-  <span class="chip">Luenberger Observer</span><span class="chip">Reduced-Order Observer</span>
-  <span class="chip">Controllability</span><span class="chip">Observability</span>
-  <span class="chip">Nonlinear Simulation</span><span class="chip">Modern Control Theory</span>
-</div>
-
-          <div class="quick"><a class="btn" href="https://github.com/Amirhosseinpoor/ControlModern" target="_blank"><i class="fa-brands fa-github"></i> Read More</a></div>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">MATLAB</span><span class="chip">Simulink</span>
+            <span class="chip">State-Space Control</span><span class="chip">Pole Placement</span>
+            <span class="chip">Full-State Feedback</span><span class="chip">Integral Control</span>
+            <span class="chip">Luenberger Observer</span><span class="chip">Reduced-Order Observer</span>
+            <span class="chip">Controllability</span><span class="chip">Observability</span>
+            <span class="chip">Nonlinear Simulation</span><span class="chip">Modern Control Theory</span>
+          </div>
+          <p class="proj-desc fade-tail" data-id="p6">
+            I designed and implemented a complete observer-based control system for the classical Ball & Beam experiment using MATLAB and Simulink. Starting from the nonlinear Lagrangian model, I derived and validated the system’s dynamics through both analytical ODEs and Simulink simulations. The model was linearized around its equilibrium, and controllability and observability were verified using rank, PBH, and Jordan tests. A full state-feedback controller was then designed via pole placement to meet time-domain performance criteria (settling time < 3 s, overshoot < 5%), followed by the inclusion of a reference pre-compensator and an integral controller to eliminate steady-state error. Finally, a reduced-order Luenberger observer was designed to estimate unmeasured states, and the integrated observer–controller was tested on the nonlinear system. The final closed-loop system achieved stable, precise tracking and validated the Separation Principle in practice.
+          </p>
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-toggle="p6">Read more</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/ControlModern" target="_blank">
+              <i class="fa-brands fa-github"></i> Read More
+            </a>
+          </div>
         </article>
+
       </div>
     </section>
 
@@ -296,13 +372,8 @@
       <div class="grid">
         <div class="card reveal">
           <h3>AI Software Engineer — <a href="https://aras.kntu.ac.ir/" target="_blank" rel="noreferrer">ARAS</a></h3>
-          <p>ARAS at K. N. Toosi University is a leading research lab in robotics and automation, focusing on areas like autonomous systems, medical robotics, and intelligent control. It combines cutting-edge research with hands-on education, mentoring students and professionals through projects, workshops, and collaborations.
-
-</p>
-                    <div class="meta">
-            <span class="chip year">2024</span>
-
-          </div>
+          <p>ARAS at K. N. Toosi University is a leading research lab in robotics and automation, focusing on areas like autonomous systems, medical robotics, and intelligent control. It combines cutting-edge research with hands-on education, mentoring students and professionals through projects, workshops, and collaborations.</p>
+          <div class="meta"><span class="chip year">2024</span></div>
         </div>
         <div class="card reveal">
           <h3>Teaching Assistant — KNTU</h3>
@@ -331,52 +402,41 @@
     </section>
 
     <!-- Achievements -->
-<section id="achievements">
-  <h2 class="reveal">Achievements & Languages</h2>
-  <div class="card reveal">
-    <ul>
-      <li>
-        <strong>
-          <a href="https://www.linkedin.com/in/amir-hossein-poor/details/certifications/?skipRedirect=true" target="_blank" rel="noopener noreferrer">
-            Sharif LLM Agents Hackathon (2025)
-          </a>:
-        </strong>
-        Ranked among the <strong>Top 12</strong> out of 132+ teams.
-      </li>
-
-      <li>
-        <strong>
-          <a href="https://www.linkedin.com/in/amir-hossein-poor/overlay/1755892423361/single-media-viewer/?type=IMAGE&profileId=ACoAAEZ8PQQBdG7ufXKGk1QpG7d3ny9qmPdIP5w&skipRedirect=true" target="_blank" rel="noopener noreferrer">
-            Dean’s List
-          </a>:
-        </strong>
-        Recognized for <strong>outstanding academic performance</strong> and consistent excellence.
-      </li>
-
-      <li>
-        <strong>Academic Distinction:</strong> Achieved <strong>Top-5 standing</strong> in a highly competitive cohort.
-      </li>
-
-      <li>
-        <strong>National Entrance Exam:</strong> Secured <strong>Rank 826</strong>, placing in the <strong>top 1% nationwide</strong>.
-      </li>
-
-      <li>
-        <strong>Professional Development:</strong> Completed 
-        <strong>Python/Django (Ista Academy, 52h)</strong> and 
-        <strong>LLM Engineering (Udemy, 18h, 2024)</strong> certifications.
-      </li>
-
-      <li>
-        <strong>Languages:</strong>  
-        Persian — Native/Bilingual · English — Full Professional Proficiency  
-        <span class="note">(TOEFL scheduled for October 25, 2025)</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-
+    <section id="achievements">
+      <h2 class="reveal">Achievements & Languages</h2>
+      <div class="card reveal">
+        <ul>
+          <li>
+            <strong>
+              <a href="https://www.linkedin.com/in/amir-hossein-poor/details/certifications/?skipRedirect=true" target="_blank" rel="noopener noreferrer">
+                Sharif LLM Agents Hackathon (2025)
+              </a>:
+            </strong>
+            Ranked among the <strong>Top 12</strong> out of 132+ teams.
+          </li>
+          <li>
+            <strong>
+              <a href="https://www.linkedin.com/in/amir-hossein-poor/overlay/1755892423361/single-media-viewer/?type=IMAGE&profileId=ACoAAEZ8PQQBdG7ufXKGk1QpG7d3ny9qmPdIP5w&skipRedirect=true" target="_blank" rel="noopener noreferrer">
+                Dean’s List
+              </a>:
+            </strong>
+            Recognized for <strong>outstanding academic performance</strong> and consistent excellence.
+          </li>
+          <li><strong>Academic Distinction:</strong> Achieved <strong>Top-5 standing</strong> in a highly competitive cohort.</li>
+          <li><strong>National Entrance Exam:</strong> Secured <strong>Rank 826</strong>, placing in the <strong>top 1% nationwide</strong>.</li>
+          <li>
+            <strong>Professional Development:</strong> Completed 
+            <strong>Python/Django (Ista Academy, 52h)</strong> and 
+            <strong>LLM Engineering (Udemy, 18h, 2024)</strong> certifications.
+          </li>
+          <li>
+            <strong>Languages:</strong>  
+            Persian — Native/Bilingual · English — Full Professional Proficiency  
+            <span class="note">(TOEFL scheduled for October 25, 2025)</span>
+          </li>
+        </ul>
+      </div>
+    </section>
 
     <!-- Contact -->
     <section id="contact">
@@ -421,26 +481,18 @@
           const angle=Math.random()*360; s.style.transform=`rotate(${angle}deg) translateX(${cfg.r/2}px)`; o.appendChild(s);} P.appendChild(o);
       });
     })();
+
+    // Expand/collapse long project descriptions (texts unchanged)
+    document.querySelectorAll('.toggle-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = btn.getAttribute('data-toggle');
+        const desc = document.querySelector(`.proj-desc[data-id="${id}"]`);
+        if(!desc) return;
+        const expanded = desc.classList.toggle('expanded');
+        if(expanded){ desc.classList.remove('fade-tail'); btn.textContent='Show less'; }
+        else{ desc.classList.add('fade-tail'); btn.textContent='Read more'; }
+      });
+    });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
