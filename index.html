@@ -210,7 +210,7 @@
         <article class="card reveal">
           <img class="thumb" src="proj-rop.jpg" alt="ROP Diagnostic thumbnail"/>
           <h3>ROP Diagnostic Web App</h3>
-          <p>Explainable screening for retinopathy of prematurity: U-Net vessel segmentation + EfficientNet-B4 classification with zone estimation. Local Llama-3 + RAG answers the “why”.</p>
+          <p>I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations. Fundus images are processed by a U-Net++ vessel segmentation network (ResNet-18 encoder) followed by three CNN heads: EfficientNet-B4 for Plus disease, EfficientNet-B6 for a 7-class stage classifier, and EfficientNet-B4 for zone estimation. The outputs feed a rule-based decision layer that maps findings to observation or treatment bands. A local Llama 3 model (served via Ollama) employs a RAG framework over a curated ophthalmology corpus stored in FAISS to generate cited, transparent clinical explanations. The system runs on a modular Django + FastAPI backend with PostgreSQL and Docker, designed for accuracy, interpretability, and practical clinical deployment.</p>
           <div class="meta">
             <span class="chip year">2024</span>
             <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Ollama</span><span class="chip">FAISS</span>
@@ -398,6 +398,7 @@
   </script>
 </body>
 </html>
+
 
 
 
