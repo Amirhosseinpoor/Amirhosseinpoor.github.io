@@ -15,7 +15,7 @@
 
   <style>
     :root{
-      --bg:#0b1220;           
+      --bg:#0b1220;
       --bg-soft:#0e1626;
       --text:#eaf1ff;
       --muted:#b5c0d0;
@@ -44,8 +44,8 @@
     .p{position:absolute;width:4px;height:4px;background:radial-gradient(circle,#fff,transparent 60%);opacity:.45;border-radius:50%;filter:blur(.4px);animation:drift linear infinite;}
     @keyframes drift{to{transform:translate3d(var(--tx),var(--ty),0) scale(var(--s));opacity:0;}}
     .particles .orbit{position:absolute;left:50%;top:50%;width:var(--r);height:var(--r);margin-left:calc(var(--r)/-2);margin-top:calc(var(--r)/-2);border-radius:50%;pointer-events:none;animation:orbitSpin var(--d) linear infinite;opacity:.55;filter:drop-shadow(0 0 6px rgba(255,255,255,.2))}
-    .particles .orbit .sat{position:absolute;left:50%;top:0;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#fff,transparent 60%);box-shadow:0 0 8px rgba(255,255,255,.7)}
-    @keyframes orbitSpin{to{transform:rotate(360deg)}}
+    .particles .orbit .sat{position:absolute;left:50%;top:0;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#fff,transparent 60%);box-shadow:0 0 8px rgba(255,255,255,.7);transform-origin:center center}
+    @keyframes orbitSpin{to{transform:rotate(360deg);}}
     @media(prefers-reduced-motion:reduce){.particles .orbit{animation:none}}
 
     header{position:sticky;top:0;z-index:10;backdrop-filter:saturate(160%) blur(10px);background:rgba(12,18,32,0.75);border-bottom:1px solid var(--card-border)}
@@ -54,8 +54,16 @@
     .nav ul{display:flex;gap:14px;margin-left:auto;list-style:none}
     .nav ul a{color:var(--muted);padding:8px 12px;border-radius:12px;transition:.2s ease}
     .nav ul a:hover{color:var(--text);background:var(--chip-bg)}
-    .logo{font-family:'Space Grotesk',sans-serif;font-size:1.9rem;font-weight:700;letter-spacing:.8px;color:#f5f7fa;transition:.3s ease}
-    .logo:hover{color:#4fc3f7;transform:scale(1.03)}
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: #f5f7fa;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+    .logo:hover { color:#4fc3f7; transform:scale(1.03); }
 
     .container{max-width:var(--maxw);margin:0 auto;padding:22px;position:relative;z-index:1}
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:70px 0 40px}
@@ -78,7 +86,7 @@
     .btn::after{content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; border:1px solid rgba(255,255,255,.08); mask:linear-gradient(#000,transparent 60%)}
     .btn::before{content:""; position:absolute; left:0; right:0; top:-40%; height:60%; border-radius:50%;
       background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%);
-      mix-blend-mode:screen; opacity:.7;
+      transform:translateY(0); pointer-events:none; mix-blend-mode:screen; opacity:.7;
     }
     .btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.45)}
     .btn:active{transform:translateY(0); box-shadow:0 2px 12px rgba(0,0,0,.35)}
@@ -111,6 +119,94 @@
     .tl-item small{color:var(--muted)}
 
     .thumb{display:block;width:100%;height:180px;object-fit:cover;object-position:center;border-radius:14px;margin-bottom:12px;border:1px solid var(--card-border);background:var(--bg-soft)}
+
+    /* ---------- Projects (from Code 1) ---------- */
+    #projects .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:1100px){ #projects .grid{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:680px){  #projects .grid{grid-template-columns:1fr} }
+    #projects .card{display:flex;flex-direction:column;gap:10px}
+    #projects .thumb{height:170px;object-fit:cover;border-radius:14px;border:1px solid var(--card-border)}
+    #projects h3{margin:6px 0 2px;font-size:18px;line-height:1.25}
+    #projects .meta{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 2px}
+    #projects .chip{font-size:12px;padding:5px 9px}
+
+    /* Progressive disclosure (Code 1) */
+    #projects .proj-desc{
+      position:relative;
+      color:var(--text);
+      line-height:1.55;
+      max-height:calc(1.55em * 8);
+      overflow:hidden;
+      display:-webkit-box;
+      -webkit-line-clamp:8;
+      -webkit-box-orient:vertical;
+      transition:max-height .35s ease;
+    }
+    #projects .proj-desc::after{
+      content:"";
+      position:absolute; left:-18px; right:-18px; bottom:-18px; height:72px;
+      background:linear-gradient(transparent, rgba(11,18,32,.92));
+      pointer-events:none;
+    }
+    #projects .card:hover .proj-desc{
+      max-height:9999px; -webkit-line-clamp:unset;
+    }
+    #projects .card:hover .proj-desc::after{ display:none; }
+
+    #projects .card.expanded .proj-desc{
+      max-height:9999px; -webkit-line-clamp:unset;
+    }
+    #projects .card.expanded .proj-desc::after{ display:none; }
+
+    /* Bottom-left actions stay pinned */
+    #projects .card-actions{
+      margin-top:auto; display:flex; gap:10px; align-items:center; justify-content:flex-start; padding-top:6px;
+    }
+    #projects .card-actions .btn{ padding:9px 12px; border-radius:10px; }
+
+    /* Chevron (Code 1) */
+    #projects .chev{
+      position:absolute; right:14px; bottom:16px;
+      width:28px; height:28px; border-radius:999px;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03));
+      backdrop-filter:saturate(160%) blur(8px);
+      cursor:pointer; opacity:.7; transition:opacity .2s ease, transform .25s ease;
+    }
+    #projects .card:hover .chev{ opacity:1; }
+    #projects .card.expanded .chev{ transform:rotate(180deg); opacity:1; }
+
+    /* ---------- Modal system (from Code 2, scoped classes) ---------- */
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(7,10,18,.72);
+      display:none; z-index:50; backdrop-filter:blur(4px);
+    }
+    .modal-backdrop[aria-hidden="false"]{display:block}
+    .modal-root{position:fixed; inset:0; display:none; z-index:51}
+    .modal-root.active{display:grid; place-items:center; padding:20px}
+    .modal-root dialog{
+      width:min(900px, 96vw);
+      border:none; border-radius:18px; padding:0; overflow:hidden;
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      box-shadow:0 30px 80px rgba(0,0,0,.55); color:var(--text);
+    }
+    .modal-header{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:14px 16px; border-bottom:1px solid var(--card-border);
+      background:rgba(12,18,32,.7); backdrop-filter:saturate(160%) blur(8px);
+    }
+    .modal-title{font-size:20px; font-weight:700}
+    .modal-body{padding:16px; max-height:60vh; overflow:auto}
+    .modal-body .thumb{height:220px; margin:0 0 12px}
+    .modal-footer{
+      padding:12px 16px; display:flex; gap:10px; justify-content:flex-start;
+      border-top:1px solid var(--card-border); background:rgba(12,18,32,.7);
+    }
+    .icon-btn{
+      border:none; background:transparent; color:var(--text); font-size:18px; padding:8px; border-radius:10px; cursor:pointer;
+    }
+    .icon-btn:hover{background:rgba(255,255,255,.08)}
   </style>
 </head>
 
@@ -164,102 +260,13 @@
       </div>
     </section>
 
-    <!-- Projects (progressive disclosure via hover/tap; no text removed) -->
+    <!-- Projects -->
     <section id="projects">
-      <style>
-        /* ---------- Projects: modern grid & progressive disclosure ---------- */
-        #projects { padding-top: 28px; }
-        #projects .grid{
-          display:grid;
-          grid-template-columns:repeat(3,1fr);
-          gap:16px;
-        }
-        @media(max-width:1100px){ #projects .grid{grid-template-columns:repeat(2,1fr)} }
-        @media(max-width:680px){  #projects .grid{grid-template-columns:1fr} }
-
-        #projects .card{
-          display:grid;
-          grid-template-rows:auto auto auto 1fr auto; /* image, title, meta, desc, actions */
-          gap:10px;
-          background:var(--card);
-          border:1px solid var(--card-border);
-          border-radius:var(--radius);
-          padding:14px;
-          box-shadow:var(--shadow);
-          transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-          overflow:hidden; position:relative;
-        }
-        #projects .card:hover{ transform:translateY(-4px); box-shadow:0 14px 36px rgba(0,0,0,.45); border-color:rgba(255,255,255,.20); }
-
-        #projects .thumb{
-          width:100%; height:180px; object-fit:cover; object-position:center;
-          border-radius:14px; border:1px solid var(--card-border); background:var(--bg-soft);
-        }
-        #projects h3{ margin:6px 0 2px; font-size:18px; line-height:1.25; }
-        #projects .meta{ display:flex; flex-wrap:wrap; gap:8px; margin:2px 0 0; }
-        #projects .chip{ font-size:12px; padding:5px 9px; background:var(--chip-bg); border:1px solid var(--card-border); border-radius:999px; }
-        #projects .chip.year{ background:rgba(167,139,250,0.16); }
-
-        /* Progressive disclosure: clamp by default with a gradient tail; expand on hover or when .expanded */
-        #projects .proj-desc{
-          position:relative;
-          color:var(--text);
-          line-height:1.55;
-          margin-top:2px;
-          max-height:calc(1.55em * 8);
-          overflow:hidden;
-          display:-webkit-box;
-          -webkit-line-clamp:8;
-          -webkit-box-orient:vertical;
-          transition:max-height .35s ease;
-        }
-        /* soft fade tail */
-        #projects .proj-desc::after{
-          content:"";
-          position:absolute; left:-14px; right:-14px; bottom:-14px; height:72px;
-          background:linear-gradient(transparent, rgba(11,18,32,.92));
-          pointer-events:none;
-        }
-        /* expand on hover (desktop) */
-        #projects .card:hover .proj-desc{
-          max-height:9999px; -webkit-line-clamp:unset;
-        }
-        #projects .card:hover .proj-desc::after{ display:none; }
-
-        /* expanded state for mobile/tap */
-        #projects .card.expanded .proj-desc{
-          max-height:9999px; -webkit-line-clamp:unset;
-        }
-        #projects .card.expanded .proj-desc::after{ display:none; }
-
-        /* Chevron affordance (non-textual, subtle) */
-        #projects .chev{
-          position:absolute; right:14px; bottom:16px;
-          width:28px; height:28px; border-radius:999px;
-          display:flex; align-items:center; justify-content:center;
-          border:1px solid rgba(255,255,255,.18);
-          background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03));
-          backdrop-filter:saturate(160%) blur(8px);
-          cursor:pointer; opacity:.7; transition:opacity .2s ease, transform .25s ease;
-        }
-        #projects .card:hover .chev{ opacity:1; }
-        #projects .card.expanded .chev{ transform:rotate(180deg); opacity:1; }
-
-        /* Pinned actions: always left & bottom */
-        #projects .card-actions{
-          margin-top:auto;
-          display:flex; align-items:center; gap:10px;
-          justify-content:flex-start;
-          padding-top:6px;
-        }
-        #projects .card-actions .btn{ padding:9px 12px; border-radius:10px; }
-      </style>
-
       <h2 class="reveal">Selected Projects</h2>
       <div class="grid">
 
         <!-- Occupational Medicine Platform -->
-        <article class="card reveal" aria-expanded="false">
+        <article class="card reveal">
           <img class="thumb" src="proj-occupational-medicine.jpg" alt="Occupational Medicine Platform thumbnail"/>
           <h3>Occupational Medicine Platform</h3>
           <div class="meta">
@@ -279,11 +286,11 @@
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Project Docs
             </a>
           </div>
-          <div class="chev" title="Expand / Collapse" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
 
         <!-- ROP Diagnostic Web App -->
-        <article class="card reveal" aria-expanded="false">
+        <article class="card reveal">
           <img class="thumb" src="proj-rop.jpg" alt="ROP Diagnostic thumbnail"/>
           <h3>ROP Diagnostic Web App</h3>
           <div class="meta">
@@ -302,11 +309,11 @@
               <i class="fa-solid fa-arrow-up-right-from-square"></i> Project Docs
             </a>
           </div>
-          <div class="chev" title="Expand / Collapse" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
 
         <!-- Speech-Driven Motor Control -->
-        <article class="card reveal" aria-expanded="false">
+        <article class="card reveal">
           <img class="thumb" src="proj-speech-motor.png" alt="Speech Driven Motor Control thumbnail"/>
           <h3>Speech-Driven Motor Control</h3>
           <div class="meta">
@@ -326,11 +333,11 @@
               <i class="fa-brands fa-github"></i> GitHub Repo
             </a>
           </div>
-          <div class="chev" title="Expand / Collapse" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
 
         <!-- Hand Gesture Recognition -->
-        <article class="card reveal" aria-expanded="false">
+        <article class="card reveal">
           <img class="thumb" src="proj-gesture.png" alt="Hand Gesture Recognition thumbnail"/>
           <h3>Hand Gesture Recognition</h3>
           <div class="meta">
@@ -349,11 +356,11 @@
               <i class="fa-brands fa-github"></i> GitHub Repo
             </a>
           </div>
-          <div class="chev" title="Expand / Collapse" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
 
         <!-- VideoFair -->
-        <article class="card reveal" aria-expanded="false">
+        <article class="card reveal">
           <img class="thumb" src="proj-videofair.png" alt="VideoFair streaming thumbnail"/>
           <h3>VideoFair — Segmentation Streaming</h3>
           <div class="meta">
@@ -371,11 +378,11 @@
               <i class="fa-brands fa-github"></i> GitHub Repo
             </a>
           </div>
-          <div class="chev" title="Expand / Collapse" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
 
         <!-- Modern Control — Ball & Beam -->
-        <article class="card reveal" aria-expanded="false">
+        <article class="card reveal">
           <img class="thumb" src="proj-ball-beam.png" alt="Ball and Beam control thumbnail"/>
           <h3>Modern Control — Ball &amp; Beam</h3>
           <div class="meta">
@@ -395,7 +402,7 @@
               <i class="fa-brands fa-github"></i> GitHub Repo
             </a>
           </div>
-          <div class="chev" title="Expand / Collapse" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
 
       </div>
@@ -487,6 +494,25 @@
     </section>
   </main>
 
+  <!-- Modal (Code 2 system) -->
+  <div class="modal-backdrop" id="backdrop" aria-hidden="true"></div>
+  <div class="modal-root" id="modalRoot" aria-hidden="true">
+    <dialog id="projDialog" role="dialog" aria-modal="true" aria-labelledby="projTitle" aria-describedby="projDesc">
+      <div class="modal-header">
+        <div id="projTitle" class="modal-title">Title</div>
+        <button class="icon-btn" id="closeModal" aria-label="Close dialog (Esc)"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <img id="projImg" class="thumb" alt="">
+        <div class="meta" id="projChips"></div>
+        <p id="projDesc" style="margin-top:10px"></p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" id="projPrimary" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Source</a>
+      </div>
+    </dialog>
+  </div>
+
   <script>
     // Intersection reveal
     const io=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.12});
@@ -506,7 +532,7 @@
       spawn(); setInterval(()=>spawn(6),2200);
     })();
 
-    // SPACE ORBITS (circulating particles)
+    // SPACE ORBITS
     (function(){
       const P=document.getElementById('particles'); if(!P) return;
       const rings=[{r:140,d:26},{r:220,d:34},{r:320,d:46},{r:460,d:62},{r:600,d:84}];
@@ -517,24 +543,88 @@
       });
     })();
 
-    // Projects: tap-to-expand for mobile; whole card toggles (no "Read more" text)
+    // Tap-to-expand for touch (Code 1 behavior)
     document.querySelectorAll('#projects .card').forEach(card=>{
-      const desc = card.querySelector('.proj-desc');
-      const chev = card.querySelector('.chev');
-      const toggle = () => {
-        const expanded = card.classList.toggle('expanded');
-        card.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-      };
-      // Click anywhere except links to toggle
       card.addEventListener('click', (e)=>{
-        const target = e.target;
-        if(target.closest('a')) return; // don't steal clicks
-        if(window.matchMedia('(hover: none)').matches) toggle(); // only on touch-first
+        if(e.target.closest('a') || e.target.closest('.chev')) return;
+        if(window.matchMedia('(hover: none)').matches){
+          card.classList.toggle('expanded');
+          card.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
+        }
       });
-      if(chev){
-        chev.addEventListener('click', (e)=>{ e.stopPropagation(); toggle(); });
-      }
     });
+
+    // -------- Modal wiring (use Code 2 system; trigger is Code 1 chevron) --------
+    (function(){
+      const modal = document.getElementById('projDialog');
+      const backdrop = document.getElementById('backdrop');
+      const root = document.getElementById('modalRoot');
+      const titleEl = document.getElementById('projTitle');
+      const imgEl = document.getElementById('projImg');
+      const chipsEl = document.getElementById('projChips');
+      const descEl = document.getElementById('projDesc');
+      const primaryBtn = document.getElementById('projPrimary');
+      const closeBtn = document.getElementById('closeModal');
+      let lastFocus = null;
+
+      function openModal(fromCard){
+        lastFocus = document.activeElement;
+
+        const h3 = fromCard.querySelector('h3');
+        const img = fromCard.querySelector('img.thumb');
+        const chips = fromCard.querySelectorAll('.meta .chip');
+        const fullText = fromCard.querySelector('.proj-desc')?.textContent.trim() || '';
+        const primaryLink = fromCard.querySelector('.card-actions a.btn');
+
+        titleEl.textContent = h3 ? h3.textContent : 'Project';
+        if(img){ imgEl.src = img.src; imgEl.alt = img.alt || ''; }
+        chipsEl.innerHTML = '';
+        chips.forEach(c=>{ const s=document.createElement('span'); s.className='chip'; s.textContent=c.textContent; chipsEl.appendChild(s); });
+        descEl.textContent = fullText;
+        if(primaryLink){ primaryBtn.href = primaryLink.href; primaryBtn.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> ' + (primaryLink.textContent.trim() || 'Source'); }
+
+        backdrop.setAttribute('aria-hidden','false');
+        root.setAttribute('aria-hidden','false');
+        root.classList.add('active');
+        modal.showModal();
+
+        closeBtn.focus();
+        document.addEventListener('keydown', escClose);
+        document.addEventListener('keydown', trapFocus);
+      }
+
+      function closeModal(){
+        modal.close();
+        backdrop.setAttribute('aria-hidden','true');
+        root.setAttribute('aria-hidden','true');
+        root.classList.remove('active');
+        document.removeEventListener('keydown', escClose);
+        document.removeEventListener('keydown', trapFocus);
+        if(lastFocus) lastFocus.focus();
+      }
+
+      function escClose(e){ if(e.key==='Escape') closeModal(); }
+
+      function trapFocus(e){
+        if(e.key!=='Tab') return;
+        const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const f = Array.from(focusable).filter(el=>!el.hasAttribute('disabled'));
+        if(!f.length) return;
+        const first = f[0], last = f[f.length-1];
+        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      }
+
+      document.querySelectorAll('#projects .chev').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          e.stopPropagation();
+          const card = e.currentTarget.closest('.card');
+          openModal(card);
+        });
+      });
+      document.getElementById('closeModal').addEventListener('click', closeModal);
+      document.getElementById('backdrop').addEventListener('click', closeModal);
+    })();
   </script>
 </body>
 </html>
