@@ -193,12 +193,17 @@
         <article class="card reveal">
           <img class="thumb" src="proj-occupational-medicine.jpg" alt="Occupational Medicine Platform thumbnail"/>
           <h3>Occupational Medicine Platform</h3>
-          <p>AI assistant that reads medical forms and lab PDFs, routes each case via an LLM to classical models (SVM/XGBoost/MLP) for HTN/DM/CVD risk, and drafts clinician reports through corrective RAG.</p>
-          <div class="meta">
-            <span class="chip year">2025</span>
-            <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
-            <span class="chip">PostgreSQL</span><span class="chip">FAISS</span><span class="chip">Docker</span>
-          </div>
+          <p>I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report. Employees and physicians submit digital forms and lab PDFs; a VLM+OCR module (Beagle-14B) extracts biomarkers and normalizes them to JSON, which an orchestrator LLM routes to task-specific predictors (SVM, XGBoost, MLP) for risks such as hypertension, diabetes, CVD, and anemia. The resulting profile triggers two agents: one maps conditions to specialties and crawls verified physician directories to surface nearby, insurance-compatible referrals; the other consults a curated pharmacology knowledge base and checks online/local availability. A reporter agent uses RAG over a FAISS vector store plus just-in-time web context to generate an evidence-backed report that explains findings, flags thresholds, and recommends next steps. The system runs on Django (RBAC, PostgreSQL) and FastAPI services, with Celery/Redis for async pipelines and Docker for reproducible deployment—designed for accuracy, traceability, and scalable clinic operations.</p>
+<div class="meta">
+  <span class="chip year">2025</span>
+  <span class="chip">VLM</span><span class="chip">OCR</span><span class="chip">LLM</span>
+  <span class="chip">Multi-Agent</span><span class="chip">Corrective RAG</span><span class="chip">LangChain</span><span class="chip">LangGraph</span>
+  <span class="chip">SVM</span><span class="chip">XGBoost</span><span class="chip">MLP</span><span class="chip">Decision Trees</span><span class="chip">Random Forest</span>
+  <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
+  <span class="chip">PostgreSQL</span><span class="chip">FAISS</span><span class="chip">Docker</span>
+  <span class="chip">Gamification</span>
+</div>
+
           <div class="quick"><a class="btn" href="https://docs.google.com/document/d/111ijh2_R-R2rszDmvnnnFNfP9ARWAPe5zgTvRYva-dA/edit?usp=sharing" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Read More</a></div>
         </article>
 
@@ -393,6 +398,7 @@
   </script>
 </body>
 </html>
+
 
 
 
