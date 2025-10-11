@@ -10,23 +10,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#0b1220;           /* Night palette (locked) */
-      --bg-soft:#0e1626;
-      --text:#eaf1ff;
-      --muted:#b5c0d0;
-      --accent:#a78bfa;       /* purple links */
-      --accent-2:#c4b5fd;
-      --card:rgba(255,255,255,0.06);
-      --card-border:rgba(255,255,255,0.12);
+      --bg:#0b1220; --bg-soft:#0e1626;
+      --text:#eaf1ff; --muted:#b5c0d0;
+      --accent:#a78bfa; --accent-2:#c4b5fd;
+      --card:rgba(255,255,255,0.06); --card-border:rgba(255,255,255,0.12);
       --chip-bg:rgba(255,255,255,0.08);
       --shadow:0 10px 30px rgba(0,0,0,0.35);
-      --radius:18px;
-      --maxw:1100px;
+      --radius:18px; --maxw:1100px;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -35,202 +29,109 @@
       background:linear-gradient(180deg,var(--bg),#0a0f1a 60%);
       background-attachment:fixed; line-height:1.55; -webkit-font-smoothing:antialiased;
     }
-
-    /* links */
     a{color:var(--accent); text-decoration:none}
     a:hover{color:var(--accent-2)}
     .content a:not(.btn):hover{text-decoration:underline}
 
-    /* --- BACKGROUND PARTICLES + ORBITS --- */
-    .particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-    .p{position:absolute;width:4px;height:4px;background:radial-gradient(circle,#fff,transparent 60%);opacity:.45;border-radius:50%;filter:blur(.4px);animation:drift linear infinite;}
-    @keyframes drift{to{transform:translate3d(var(--tx),var(--ty),0) scale(var(--s));opacity:0;}}
-    /* orbiting rings (space vibe) */
-    .particles .orbit{position:absolute;left:50%;top:50%;width:var(--r);height:var(--r);margin-left:calc(var(--r)/-2);margin-top:calc(var(--r)/-2);border-radius:50%;pointer-events:none;animation:orbitSpin var(--d) linear infinite;opacity:.55;filter:drop-shadow(0 0 6px rgba(255,255,255,.2))}
-    .particles .orbit .sat{position:absolute;left:50%;top:0;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#fff,transparent 60%);box-shadow:0 0 8px rgba(255,255,255,.7);transform-origin:center center}
-    @keyframes orbitSpin{to{transform:rotate(360deg);}}
-    @media(prefers-reduced-motion:reduce){.particles .orbit{animation:none}}
-
     header{position:sticky;top:0;z-index:10;backdrop-filter:saturate(160%) blur(10px);background:rgba(12,18,32,0.75);border-bottom:1px solid var(--card-border)}
     .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px 20px}
-    .nav a.logo{font-weight:800}
+    .nav a.logo{font-weight:800; font-family:'Space Grotesk',sans-serif; font-size:1.9rem; letter-spacing:.8px; color:#f5f7fa}
+    .nav a.logo:hover{color:#4fc3f7; transform:scale(1.03)}
     .nav ul{display:flex;gap:14px;margin-left:auto;list-style:none}
     .nav ul a{color:var(--muted);padding:8px 12px;border-radius:12px;transition:.2s ease}
     .nav ul a:hover{color:var(--text);background:var(--chip-bg)}
-    .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.9rem;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      color: #f5f7fa;
-      text-decoration: none;
-      transition: color 0.3s ease, transform 0.2s ease;
-    }
-    .logo:hover { color:#4fc3f7; transform:scale(1.03); }
 
     .container{max-width:var(--maxw);margin:0 auto;padding:22px;position:relative;z-index:1}
-    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:70px 0 40px}
-    .hero .card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
-    .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(167,139,250,0.16);border:1px solid var(--card-border);color:var(--text);font-size:12px}
-    h1{font-size:clamp(32px,5vw,52px);line-height:1.07;margin:14px 0 12px}
-    .lead{color:var(--muted);font-size:clamp(15px,1.9vw,18px)} 
-    .quick{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    section{padding:28px 0 14px}
+    section>h2{font-size:clamp(22px,3vw,28px);margin-bottom:14px}
 
-    /* iOS-like glassy buttons */
     .btn{
       position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:8px;
       padding:10px 14px; border-radius:12px; color:var(--text);
       background:linear-gradient(180deg,rgba(255,255,255,.16),rgba(255,255,255,.06));
       border:1px solid rgba(255,255,255,.18);
       border-right-color:rgba(255,255,255,.12); border-bottom-color:rgba(255,255,255,.12);
-      backdrop-filter:saturate(160%) blur(12px); -webkit-backdrop-filter:saturate(160%) blur(12px);
+      backdrop-filter:saturate(160%) blur(12px);
       box-shadow:0 2px 12px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25), inset 0 -1px 0 rgba(0,0,0,.08);
       transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
     }
-    .btn::after{content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none; border:1px solid rgba(255,255,255,.08); mask:linear-gradient(#000,transparent 60%)}
-    .btn::before{content:""; position:absolute; left:0; right:0; top:-40%; height:60%; border-radius:50%;
-      background:radial-gradient(ellipse at 50% 20%, rgba(255,255,255,.35), rgba(255,255,255,0) 60%);
-      transform:translateY(0); pointer-events:none; mix-blend-mode:screen; opacity:.7;
-    }
     .btn:hover{transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.45)}
-    .btn:active{transform:translateY(0); box-shadow:0 2px 12px rgba(0,0,0,.35)}
 
+    .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:60px 0 34px}
+    .hero .card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px}
+    .tag{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:999px;background:rgba(167,139,250,0.16);border:1px solid var(--card-border);font-size:12px}
+    h1{font-size:clamp(32px,5vw,52px);line-height:1.07;margin:14px 0 12px}
+    .lead{color:var(--muted);font-size:clamp(15px,1.9vw,18px)}
     .hero-visual{aspect-ratio:1/1;border-radius:var(--radius);position:relative;overflow:hidden;border:1px solid var(--card-border);box-shadow:var(--shadow)}
     .hero-visual .portrait{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-
-    section{padding:28px 0 14px}
-    section>h2{font-size:clamp(22px,3vw,28px);margin-bottom:14px}
+    @media(max-width:1000px){.hero{grid-template-columns:1fr} .hero-visual{height:320px}}
+    @media(max-width:640px){.nav ul{display:none}}
 
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media(max-width:1100px){ .grid{grid-template-columns:repeat(2,1fr)} }
+    @media(max-width:680px){  .grid{grid-template-columns:1fr} }
+
     .card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);transition:.25s ease}
     .card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(0,0,0,.45)}
-
-    .skills{display:flex;flex-wrap:wrap;gap:10px}
-    footer{padding:32px 0 60px;color:var(--muted)} 
-    .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
-    .reveal.in{opacity:1;transform:translateY(0)}
-    @media(max-width:1000px){.hero{grid-template-columns:1fr} .hero-visual{height:320px} .grid{grid-template-columns:1fr 1fr}}
-    @media(max-width:640px){.grid{grid-template-columns:1fr} .nav ul{display:none}}
-
-    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .chip{font-size:12.5px;padding:6px 10px;border-radius:999px;background:var(--chip-bg);border:1px solid var(--card-border);color:var(--text)}
+    .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+    .chip{font-size:12.5px;padding:6px 10px;border-radius:999px;background:var(--chip-bg);border:1px solid var(--card-border)}
     .chip.year{background:rgba(167,139,250,0.16)}
+    .thumb{display:block;width:100%;height:180px;object-fit:cover;object-position:center;border-radius:14px;margin-bottom:10px;border:1px solid var(--card-border);background:var(--bg-soft)}
 
-    .timeline{position:relative;margin:6px 0}
-    .timeline:before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(var(--accent),transparent);opacity:.6}
-    .tl-item{position:relative;padding-left:30px;margin:14px 0}
-    .tl-item:before{content:"";position:absolute;left:5px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(167,139,250,0.25)}
-    .tl-item small{color:var(--muted)}
-
-    .thumb{display:block;width:100%;height:180px;object-fit:cover;object-position:center;border-radius:14px;margin-bottom:12px;border:1px solid var(--card-border);background:var(--bg-soft)}
-
-    /* ---------- Projects: compact, readable, toggleable ---------- */
-    #projects .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    @media(max-width:1100px){ #projects .grid{grid-template-columns:repeat(2,1fr)} }
-    @media(max-width:680px){  #projects .grid{grid-template-columns:1fr} }
-    #projects .card{display:flex;flex-direction:column;gap:10px}
-    #projects .thumb{height:170px;object-fit:cover;border-radius:14px;border:1px solid var(--card-border)}
-    #projects h3{margin:6px 0 2px;font-size:18px;line-height:1.25}
-    #projects .meta{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 2px}
-    #projects .chip{font-size:12px;padding:5px 9px}
-
-    .proj-desc{
-      color:var(--text);
-      position:relative;
-      line-height:1.55;
-      max-height:calc(1.55em * 5);  /* ~5 lines */
-      overflow:hidden;
-      display:-webkit-box;
-      -webkit-line-clamp:5;
-      -webkit-box-orient:vertical;
-      transition:max-height .25s ease;
+    /* =========================
+       PROJECTS — REFACTORED
+       Pattern: Card grid + modal case study
+       ========================= */
+    #projects h3{font-size:20px; line-height:1.28; margin:4px 0}
+    .project-card{display:flex; flex-direction:column; min-height:420px}
+    .project-excerpt{
+      color:var(--text); opacity:.95;
+      display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:4; overflow:hidden;
+      margin-top:6px;
     }
-    .proj-desc.expanded{ -webkit-line-clamp:unset; max-height:9999px; }
-    .fade-tail{ position:relative; }
-    .fade-tail::after{
-      content:"";
-      position:absolute; left:0; right:0; bottom:0; height:48px;
-      background:linear-gradient(transparent, rgba(11,18,32,.92));
-      pointer-events:none; border-bottom-left-radius:var(--radius); border-bottom-right-radius:var(--radius);
-      display:block;
+    .project-actions{margin-top:auto; display:flex; gap:10px}
+    .project-actions .btn{align-self:flex-start}
+
+    /* -------- Accessible Modal -------- */
+    .modal-backdrop{
+      position:fixed; inset:0; background:rgba(7,10,18,.72);
+      display:none; z-index:50; backdrop-filter:blur(4px);
     }
-    .toggle-wrap{display:flex;gap:10px;align-items:center;margin-top:6px}
-    .toggle-btn{
-      cursor:pointer; user-select:none;
-      padding:8px 10px; border-radius:10px;
-      border:1px solid rgba(255,255,255,.18);
-      background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));
-      color:var(--text); font-size:13px;
-      backdrop-filter:saturate(160%) blur(10px);
+    .modal-backdrop[aria-hidden="false"]{display:block}
+    .modal{
+      position:fixed; inset:0; display:grid; place-items:center; padding:20px;
     }
-    .toggle-btn:hover{box-shadow:0 6px 18px rgba(0,0,0,.35)}
-    #projects .quick{margin-top:auto; padding-top:6px}
+    .modal dialog{
+      width:min(900px, 96vw);
+      border:none; border-radius:18px; padding:0; overflow:hidden;
+      background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));
+      box-shadow:0 30px 80px rgba(0,0,0,.55); color:var(--text);
+    }
+    .modal-header{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:14px 16px; border-bottom:1px solid var(--card-border);
+      background:rgba(12,18,32,.7); backdrop-filter:saturate(160%) blur(8px);
+    }
+    .modal-title{font-size:20px; font-weight:700}
+    .modal-body{padding:16px}
+    .modal-body .thumb{height:220px; margin:0 0 12px}
+    .modal-footer{
+      padding:12px 16px; display:flex; gap:10px; justify-content:flex-start;
+      border-top:1px solid var(--card-border); background:rgba(12,18,32,.7);
+    }
+    .icon-btn{
+      border:none; background:transparent; color:var(--text); font-size:18px; padding:8px; border-radius:10px; cursor:pointer;
+    }
+    .icon-btn:hover{background:rgba(255,255,255,.08)}
+    .sr-only{position:absolute!important; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+
+    /* small utility */
+    .muted{color:var(--muted)}
   </style>
-  <style>
-  /* ---------- Projects (clean, bottom-left CTA, no toggle) ---------- */
-  #projects .grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:16px;
-  }
-  @media(max-width:1100px){ #projects .grid{grid-template-columns:repeat(2,1fr)} }
-  @media(max-width:680px){  #projects .grid{grid-template-columns:1fr} }
-
-  #projects .card{
-    position:relative;
-    display:flex; flex-direction:column;
-    gap:12px;
-    background:var(--card);
-    border:1px solid var(--card-border);
-    border-radius:var(--radius);
-    padding:16px 16px 14px;
-    box-shadow:var(--shadow);
-  }
-  #projects .thumb{
-    height:170px; object-fit:cover;
-    border-radius:14px; border:1px solid var(--card-border);
-  }
-  #projects h3{margin:2px 0 0; font-size:18px; line-height:1.25}
-  #projects .meta{display:flex; flex-wrap:wrap; gap:8px; margin:2px 0 0}
-  #projects .chip{font-size:12px; padding:5px 9px}
-
-  /* readable clamp (no JS) */
-  .desc-wrap{ position:relative; }
-  .proj-desc{
-    margin:0;
-    color:var(--text);
-    line-height:1.55;
-    overflow:hidden;
-    display:-webkit-box;
-    -webkit-line-clamp:5;          /* ~5 lines */
-    -webkit-box-orient:vertical;
-  }
-  /* soft fade that doesn't cover the button area */
-  .desc-wrap::after{
-    content:"";
-    position:absolute; left:0; right:0; bottom:-2px; height:44px;
-    background:linear-gradient(transparent, rgba(11,18,32,.92));
-    border-bottom-left-radius:var(--radius);
-    border-bottom-right-radius:var(--radius);
-    pointer-events:none;
-  }
-
-  /* bottom-left action always */
-  .actions{
-    margin-top:auto;               /* pushes to bottom */
-    display:flex; gap:10px;
-  }
-  .actions .btn{
-    align-self:flex-start;         /* bottom-left */
-    padding:10px 14px;
-  }
-</style>
-
 </head>
 
 <body class="content">
-  <div class="particles" id="particles"></div>
-
+  <!-- NAV -->
   <header>
     <nav class="nav">
       <a href="#top" class="logo">Amir Hosseinpoor</a>
@@ -246,270 +147,201 @@
   </header>
 
   <main class="container" id="top">
-    <!-- Hero -->
+    <!-- HERO -->
     <section class="hero">
-      <div class="card reveal">
+      <div class="card">
         <span class="tag">Electrical Engineering – AI</span>
         <h1>Amir Hosseinpoor</h1>
         <p class="lead">I design and build end-to-end AI systems, bridging robust engineering with advanced LLM applications. From scalable backends to intelligent agents and multimodal workflows, I turn concepts into working solutions.</p>
-        <div class="quick">
+        <div class="project-actions" style="margin-top:14px">
           <a class="btn" href="mailto:amirhosseinpoora6@gmail.com"><i class="fa-solid fa-envelope"></i>Email</a>
           <a class="btn" href="https://www.linkedin.com/in/amir-hossein-poor/" target="_blank"><i class="fa-brands fa-linkedin"></i>LinkedIn</a>
           <a class="btn" href="https://github.com/Amirhosseinpoor" target="_blank"><i class="fa-brands fa-github"></i>GitHub</a>
           <a class="btn" href="#contact"><i class="fa-solid fa-id-card"></i>Contact</a>
         </div>
       </div>
-      <div class="hero-visual reveal"><img class="portrait" src="photo_2025-05-02_22-11-26.jpg" alt="portrait"/></div>
+      <div class="hero-visual"><img class="portrait" src="photo_2025-05-02_22-11-26.jpg" alt="portrait"/></div>
     </section>
 
-    <!-- About -->
+    <!-- ABOUT -->
     <section id="about">
-      <h2 class="reveal">About & Education</h2>
-      <div class="card reveal">
+      <h2>About & Education</h2>
+      <div class="card">
         <p>As an Electrical Engineering student, my focus is on the intersection of machine learning and systems design. I specialize in developing robust AI systems by integrating foundational backend engineering (Python, Django/FastAPI, Docker) with advanced LLM applications, including retrieval-augmented generation (RAG), intelligent agents, and multimodal processing.</p>
-        <div class="quick" style="margin-top:12px">
-          <a class="btn" href="https://drive.google.com/file/d/1BtLobAcpdDgGjZvgNsqihrvZMUJcnBUs/view?usp=sharing" target="_blank"><i class="fa-solid fa-file-arrow-down"></i> Download CV (PDF)</a>
+        <div class="project-actions" style="margin-top:12px">
+          <a class="btn" href="https://drive.google.com/file/d/1BtLobAcpdDgGjZvgNsqihrvZMUJcnBUs/view?usp=sharing" target="_blank"><i class="fa-solid fa-file-arrow-down"></i> CV (PDF)</a>
           <a class="btn" href="https://drive.google.com/file/d/1he9rGnJcCQ1bBzCy7H5JkDHr23Goc4-T/view?usp=sharing" target="_blank"><i class="fa-solid fa-file-lines"></i> Grade Report</a>
         </div>
-        <div class="timeline" style="margin-top:10px">
-          <div class="tl-item"><strong>B.Sc. in Electrical Engineering (AI)</strong> — <a href="https://www.kntu.ac.ir/" target="_blank" rel="noreferrer">K. N. Toosi University of Technology</a><br><small>2022 — Present • GPA 19.36/20 (4.0)</small></div>
-          <div class="tl-item"><strong>High School Diploma (Mathematical Physics)</strong> — <a href="https://www.linkedin.com/school/iransampad/" target="_blank" rel="noreferrer">National Organization for Development of Exceptional Talents (Sampad / NODET)</a><br><small>2019 — 2022</small></div>
-        </div>
       </div>
     </section>
 
-    <!-- Projects (reworked for readability; texts unchanged) -->
+    <!-- ========================= PROJECTS (NEW PATTERN) ========================= -->
     <section id="projects">
-  <h2 class="reveal">Selected Projects</h2>
-  <div class="grid">
+      <h2>Selected Projects</h2>
 
-    <!-- Occupational Medicine Platform -->
-    <article class="card reveal">
-      <img class="thumb" src="proj-occupational-medicine.jpg" alt="Occupational Medicine Platform thumbnail"/>
-      <h3>Occupational Medicine Platform</h3>
-      <div class="meta">
-        <span class="chip year">2025</span>
-        <span class="chip">VLM</span><span class="chip">OCR</span><span class="chip">LLM</span>
-        <span class="chip">Multi-Agent</span><span class="chip">Corrective RAG</span><span class="chip">LangChain</span><span class="chip">LangGraph</span>
-        <span class="chip">SVM</span><span class="chip">XGBoost</span><span class="chip">MLP</span><span class="chip">Decision Trees</span><span class="chip">Random Forest</span>
-        <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
-        <span class="chip">PostgreSQL</span><span class="chip">FAISS</span><span class="chip">Docker</span>
-        <span class="chip">Gamification</span>
-      </div>
-      <div class="desc-wrap">
-        <p class="proj-desc">
-          I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report. Employees and physicians submit digital forms and lab PDFs; a VLM+OCR module (Beagle-14B) extracts biomarkers and normalizes them to JSON, which an orchestrator LLM routes to task-specific predictors (SVM, XGBoost, MLP) for risks such as hypertension, diabetes, CVD, and anemia. The resulting profile triggers two agents: one maps conditions to specialties and crawls verified physician directories to surface nearby, insurance-compatible referrals; the other consults a curated pharmacology knowledge base and checks online/local availability. A reporter agent uses RAG over a FAISS vector store plus just-in-time web context to generate an evidence-backed report that explains findings, flags thresholds, and recommends next steps. The system runs on Django (RBAC, PostgreSQL) and FastAPI services, with Celery/Redis for async pipelines and Docker for reproducible deployment—designed for accuracy, traceability, and scalable clinic operations.
-        </p>
-      </div>
-      <div class="actions">
-        <a class="btn" href="https://docs.google.com/document/d/111ijh2_R-R2rszDmvnnnFNfP9ARWAPe5zgTvRYva-dA/edit?usp=sharing" target="_blank">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Read More
-        </a>
-      </div>
-    </article>
-
-    <!-- ROP Diagnostic Web App -->
-    <article class="card reveal">
-      <img class="thumb" src="proj-rop.jpg" alt="ROP Diagnostic thumbnail"/>
-      <h3>ROP Diagnostic Web App</h3>
-      <div class="meta">
-        <span class="chip year">2024</span>
-        <span class="chip">U-Net++</span><span class="chip">EfficientNet-B6</span><span class="chip">EfficientNet-B4</span>
-        <span class="chip">Segmentation</span><span class="chip">Classification</span><span class="chip">RAG</span>
-        <span class="chip">Llama-3 (Local)</span><span class="chip">FAISS</span><span class="chip">Explainable AI</span>
-        <span class="chip">Decision Layer</span><span class="chip">Django</span><span class="chip">FastAPI</span>
-        <span class="chip">PostgreSQL</span><span class="chip">Docker</span>
-      </div>
-      <div class="desc-wrap">
-        <p class="proj-desc">
-          I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations. Fundus images are processed by a U-Net++ vessel segmentation network (ResNet-18 encoder) followed by three CNN heads: EfficientNet-B4 for Plus disease, EfficientNet-B6 for a 7-class stage classifier, and EfficientNet-B4 for zone estimation. The outputs feed a rule-based decision layer that maps findings to observation or treatment bands. A local Llama 3 model (served via Ollama) employs a RAG framework over a curated ophthalmology corpus stored in FAISS to generate cited, transparent clinical explanations. The system runs on a modular Django + FastAPI backend with PostgreSQL and Docker, designed for accuracy, interpretability, and practical clinical deployment.
-        </p>
-      </div>
-      <div class="actions">
-        <a class="btn" href="https://docs.google.com/document/d/1SSc-_QHBRh611wSVSCWC5q2S5r3POsPiid-YWUOPjI4/edit?usp=sharing" target="_blank">
-          <i class="fa-solid fa-arrow-up-right-from-square"></i> Read More
-        </a>
-      </div>
-    </article>
-
-    <!-- Speech-Driven Motor Control -->
-    <article class="card reveal">
-      <img class="thumb" src="proj-speech-motor.png" alt="Speech Driven Motor Control thumbnail"/>
-      <h3>Speech-Driven Motor Control</h3>
-      <div class="meta">
-        <span class="chip year">2025</span>
-        <span class="chip">Whisper</span><span class="chip">LLM</span><span class="chip">Intent Recognition</span>
-        <span class="chip">Rule-Based Parsing</span><span class="chip">Natural Language Processing</span>
-        <span class="chip">FastAPI</span><span class="chip">Python</span><span class="chip">Serial Communication</span>
-        <span class="chip">Arduino</span><span class="chip">Embedded Control</span>
-        <span class="chip">Speech Recognition</span><span class="chip">REST API</span>
-        <span class="chip">Asynchronous Backend</span><span class="chip">Docker</span>
-      </div>
-      <div class="desc-wrap">
-        <p class="proj-desc">
-          I developed a bilingual voice-to-action system that translates natural-language commands into real-time motor control. The pipeline converts spoken or typed English and Persian inputs using Whisper ASR, then parses intent through an optional LLM (GPT-4o-mini) with a rule-based fallback for offline reliability. Commands such as “increase 10%” or “set to 3000” are normalized, resolved mathematically, and clamped to safe RPM limits before being transmitted over serial to an Arduino. The microcontroller executes feedback-driven PWM control with live RPM display on a Nokia 5110 LCD. Built with FastAPI, Python, and an embedded C++ firmware loop, the system demonstrates tight integration between speech processing, language understanding, and low-level hardware control for accessible, voice-driven mechatronics.
-        </p>
-      </div>
-      <div class="actions">
-        <a class="btn" href="https://github.com/Amirhosseinpoor/ElectricalMachine" target="_blank">
-          <i class="fa-brands fa-github"></i> Read More
-        </a>
-      </div>
-    </article>
-
-    <!-- Hand Gesture Recognition -->
-    <article class="card reveal">
-      <img class="thumb" src="proj-gesture.png" alt="Hand Gesture Recognition thumbnail"/>
-      <h3>Hand Gesture Recognition</h3>
-      <div class="meta">
-        <span class="chip year">2025</span>
-        <span class="chip">MediaPipe</span><span class="chip">TensorFlow</span><span class="chip">Keras</span>
-        <span class="chip">LSTM</span><span class="chip">GRU</span><span class="chip">MLP</span>
-        <span class="chip">TFLite</span><span class="chip">Gesture Recognition</span><span class="chip">Real-Time Inference</span>
-        <span class="chip">OpenCV</span><span class="chip">Python</span><span class="chip">Raspberry Pi</span>
-        <span class="chip">GPIO</span><span class="chip">VLC Integration</span><span class="chip">DBus/MPRIS</span>
-      </div>
-      <div class="desc-wrap">
-        <p class="proj-desc">
-          I designed a lightweight, real-time hand-gesture recognition system that enables both media and hardware control without heavy convolutional models. Using MediaPipe Hands to extract 63-dimensional landmark features, the pipeline trains compact temporal networks (LSTM, GRU, RNN, MLP) that automatically select the best architecture based on validation accuracy. The trained model is exported to TensorFlow Lite for on-device inference across two runtimes: (A) a Linux-based VLC controller that maps gestures to play, pause, seek, and volume actions via DBus/MPRIS, and (B) a Raspberry Pi application that controls five LEDs using debounced GPIO signals. The system achieves robust real-time performance and is optimized for portability, low compute cost, and responsiveness in embedded and desktop environments.
-        </p>
-      </div>
-      <div class="actions">
-        <a class="btn" href="https://github.com/Amirhosseinpoor/mechat" target="_blank">
-          <i class="fa-brands fa-github"></i> Read More
-        </a>
-      </div>
-    </article>
-
-    <!-- VideoFair -->
-    <article class="card reveal">
-      <img class="thumb" src="proj-videofair.png" alt="VideoFair streaming thumbnail"/>
-      <h3>VideoFair — Segmentation Streaming</h3>
-      <div class="meta">
-        <span class="chip year">2025</span>
-        <span class="chip">YOLOv8</span><span class="chip">Computer Vision</span><span class="chip">Segmentation</span>
-        <span class="chip">OpenCV</span><span class="chip">FFmpeg</span><span class="chip">HLS Streaming</span>
-        <span class="chip">Django</span><span class="chip">Celery</span><span class="chip">Redis</span>
-        <span class="chip">Asynchronous Processing</span><span class="chip">Docker</span><span class="chip">Video AI</span>
-      </div>
-      <div class="desc-wrap">
-        <p class="proj-desc">
-          I developed a video segmentation and streaming platform that performs selective YOLOv8 inference on trimmed time windows and delivers real-time playback via HTTP Live Streaming (HLS). Users upload and segment videos through a Django-based web interface, while asynchronous Celery workers handle heavy GPU tasks for object segmentation, frame overlay rendering, and FFmpeg-based HLS conversion. The modular backend allows easy swapping of weights, codecs, or models and ensures efficient distributed processing. This project demonstrates scalable video AI integration with practical deployment pipelines for multimedia analytics and streaming.
-        </p>
-      </div>
-      <div class="actions">
-        <a class="btn" href="https://github.com/Amirhosseinpoor/streamingapp/tree/triming" target="_blank">
-          <i class="fa-brands fa-github"></i> Read More
-        </a>
-      </div>
-    </article>
-
-    <!-- Modern Control — Ball & Beam -->
-    <article class="card reveal">
-      <img class="thumb" src="proj-ball-beam.png" alt="Ball and Beam control thumbnail"/>
-      <h3>Modern Control — Ball &amp; Beam</h3>
-      <div class="meta">
-        <span class="chip year">2025</span>
-        <span class="chip">MATLAB</span><span class="chip">Simulink</span>
-        <span class="chip">State-Space Control</span><span class="chip">Pole Placement</span>
-        <span class="chip">Full-State Feedback</span><span class="chip">Integral Control</span>
-        <span class="chip">Luenberger Observer</span><span class="chip">Reduced-Order Observer</span>
-        <span class="chip">Controllability</span><span class="chip">Observability</span>
-        <span class="chip">Nonlinear Simulation</span><span class="chip">Modern Control Theory</span>
-      </div>
-      <div class="desc-wrap">
-        <p class="proj-desc">
-          I designed and implemented a complete observer-based control system for the classical Ball & Beam experiment using MATLAB and Simulink. Starting from the nonlinear Lagrangian model, I derived and validated the system’s dynamics through both analytical ODEs and Simulink simulations. The model was linearized around its equilibrium, and controllability and observability were verified using rank, PBH, and Jordan tests. A full state-feedback controller was then designed via pole placement to meet time-domain performance criteria (settling time < 3 s, overshoot < 5%), followed by the inclusion of a reference pre-compensator and an integral controller to eliminate steady-state error. Finally, a reduced-order Luenberger observer was designed to estimate unmeasured states, and the integrated observer–controller was tested on the nonlinear system. The final closed-loop system achieved stable, precise tracking and validated the Separation Principle in practice.
-        </p>
-      </div>
-      <div class="actions">
-        <a class="btn" href="https://github.com/Amirhosseinpoor/ControlModern" target="_blank">
-          <i class="fa-brands fa-github"></i> Read More
-        </a>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-    <!-- Experience -->
-    <section id="experience">
-      <h2 class="reveal">Work & Teaching</h2>
       <div class="grid">
-        <div class="card reveal">
+
+        <!-- 1) Occupational Medicine Platform -->
+        <article class="card project-card" data-modal="p1">
+          <img class="thumb" src="proj-occupational-medicine.jpg" alt="Occupational Medicine Platform thumbnail"/>
+          <h3>Occupational Medicine Platform</h3>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">VLM</span><span class="chip">OCR</span><span class="chip">LLM</span>
+            <span class="chip">Multi-Agent</span><span class="chip">Corrective RAG</span>
+            <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
+            <span class="chip">FAISS</span><span class="chip">PostgreSQL</span><span class="chip">Docker</span>
+          </div>
+          <p class="project-excerpt">
+            I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report…
+          </p>
+          <div class="project-actions">
+            <button class="btn open-modal" data-target="p1"><i class="fa-regular fa-file-lines"></i> Case Study</button>
+            <a class="btn" href="https://docs.google.com/document/d/111ijh2_R-R2rszDmvnnnFNfP9ARWAPe5zgTvRYva-dA/edit?usp=sharing" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Read More</a>
+          </div>
+          <!-- full text (unchanged) -->
+          <div class="sr-only" id="p1-content">
+            I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report. Employees and physicians submit digital forms and lab PDFs; a VLM+OCR module (Beagle-14B) extracts biomarkers and normalizes them to JSON, which an orchestrator LLM routes to task-specific predictors (SVM, XGBoost, MLP) for risks such as hypertension, diabetes, CVD, and anemia. The resulting profile triggers two agents: one maps conditions to specialties and crawls verified physician directories to surface nearby, insurance-compatible referrals; the other consults a curated pharmacology knowledge base and checks online/local availability. A reporter agent uses RAG over a FAISS vector store plus just-in-time web context to generate an evidence-backed report that explains findings, flags thresholds, and recommends next steps. The system runs on Django (RBAC, PostgreSQL) and FastAPI services, with Celery/Redis for async pipelines and Docker for reproducible deployment—designed for accuracy, traceability, and scalable clinic operations.
+          </div>
+        </article>
+
+        <!-- 2) ROP Diagnostic Web App -->
+        <article class="card project-card" data-modal="p2">
+          <img class="thumb" src="proj-rop.jpg" alt="ROP Diagnostic thumbnail"/>
+          <h3>ROP Diagnostic Web App</h3>
+          <div class="meta">
+            <span class="chip year">2024</span>
+            <span class="chip">U-Net++</span><span class="chip">EfficientNet-B6</span><span class="chip">RAG</span>
+            <span class="chip">Explainable AI</span><span class="chip">FAISS</span>
+            <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Docker</span>
+          </div>
+          <p class="project-excerpt">I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations…</p>
+          <div class="project-actions">
+            <button class="btn open-modal" data-target="p2"><i class="fa-regular fa-file-lines"></i> Case Study</button>
+            <a class="btn" href="https://docs.google.com/document/d/1SSc-_QHBRh611wSVSCWC5q2S5r3POsPiid-YWUOPjI4/edit?usp=sharing" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Read More</a>
+          </div>
+          <div class="sr-only" id="p2-content">
+            I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations. Fundus images are processed by a U-Net++ vessel segmentation network (ResNet-18 encoder) followed by three CNN heads: EfficientNet-B4 for Plus disease, EfficientNet-B6 for a 7-class stage classifier, and EfficientNet-B4 for zone estimation. The outputs feed a rule-based decision layer that maps findings to observation or treatment bands. A local Llama 3 model (served via Ollama) employs a RAG framework over a curated ophthalmology corpus stored in FAISS to generate cited, transparent clinical explanations. The system runs on a modular Django + FastAPI backend with PostgreSQL and Docker, designed for accuracy, interpretability, and practical clinical deployment.
+          </div>
+        </article>
+
+        <!-- 3) Speech-Driven Motor Control -->
+        <article class="card project-card" data-modal="p3">
+          <img class="thumb" src="proj-speech-motor.png" alt="Speech Driven Motor Control thumbnail"/>
+          <h3>Speech-Driven Motor Control</h3>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">Whisper</span><span class="chip">LLM</span><span class="chip">Intent Recognition</span>
+            <span class="chip">FastAPI</span><span class="chip">Arduino</span><span class="chip">Docker</span>
+          </div>
+          <p class="project-excerpt">I developed a bilingual voice-to-action system that translates natural-language commands into real-time motor control…</p>
+          <div class="project-actions">
+            <button class="btn open-modal" data-target="p3"><i class="fa-regular fa-file-lines"></i> Case Study</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/ElectricalMachine" target="_blank"><i class="fa-brands fa-github"></i> Read More</a>
+          </div>
+          <div class="sr-only" id="p3-content">
+            I developed a bilingual voice-to-action system that translates natural-language commands into real-time motor control. The pipeline converts spoken or typed English and Persian inputs using Whisper ASR, then parses intent through an optional LLM (GPT-4o-mini) with a rule-based fallback for offline reliability. Commands such as “increase 10%” or “set to 3000” are normalized, resolved mathematically, and clamped to safe RPM limits before being transmitted over serial to an Arduino. The microcontroller executes feedback-driven PWM control with live RPM display on a Nokia 5110 LCD. Built with FastAPI, Python, and an embedded C++ firmware loop, the system demonstrates tight integration between speech processing, language understanding, and low-level hardware control for accessible, voice-driven mechatronics.
+          </div>
+        </article>
+
+        <!-- 4) Hand Gesture Recognition -->
+        <article class="card project-card" data-modal="p4">
+          <img class="thumb" src="proj-gesture.png" alt="Hand Gesture Recognition thumbnail"/>
+          <h3>Hand Gesture Recognition</h3>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">MediaPipe</span><span class="chip">TensorFlow</span><span class="chip">TFLite</span>
+            <span class="chip">Python</span><span class="chip">Raspberry Pi</span>
+          </div>
+          <p class="project-excerpt">I designed a lightweight, real-time hand-gesture recognition system that enables both media and hardware control without heavy CNNs…</p>
+          <div class="project-actions">
+            <button class="btn open-modal" data-target="p4"><i class="fa-regular fa-file-lines"></i> Case Study</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/mechat" target="_blank"><i class="fa-brands fa-github"></i> Read More</a>
+          </div>
+          <div class="sr-only" id="p4-content">
+            I designed a lightweight, real-time hand-gesture recognition system that enables both media and hardware control without heavy convolutional models. Using MediaPipe Hands to extract 63-dimensional landmark features, the pipeline trains compact temporal networks (LSTM, GRU, RNN, MLP) that automatically select the best architecture based on validation accuracy. The trained model is exported to TensorFlow Lite for on-device inference across two runtimes: (A) a Linux-based VLC controller that maps gestures to play, pause, seek, and volume actions via DBus/MPRIS, and (B) a Raspberry Pi application that controls five LEDs using debounced GPIO signals. The system achieves robust real-time performance and is optimized for portability, low compute cost, and responsiveness in embedded and desktop environments.
+          </div>
+        </article>
+
+        <!-- 5) VideoFair -->
+        <article class="card project-card" data-modal="p5">
+          <img class="thumb" src="proj-videofair.png" alt="VideoFair streaming thumbnail"/>
+          <h3>VideoFair — Segmentation Streaming</h3>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">YOLOv8</span><span class="chip">Computer Vision</span><span class="chip">HLS</span>
+            <span class="chip">Django</span><span class="chip">Celery</span><span class="chip">Redis</span>
+          </div>
+          <p class="project-excerpt">I developed a video segmentation and streaming platform that performs selective YOLOv8 inference and delivers HLS playback…</p>
+          <div class="project-actions">
+            <button class="btn open-modal" data-target="p5"><i class="fa-regular fa-file-lines"></i> Case Study</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/streamingapp/tree/triming" target="_blank"><i class="fa-brands fa-github"></i> Read More</a>
+          </div>
+          <div class="sr-only" id="p5-content">
+            I developed a video segmentation and streaming platform that performs selective YOLOv8 inference on trimmed time windows and delivers real-time playback via HTTP Live Streaming (HLS). Users upload and segment videos through a Django-based web interface, while asynchronous Celery workers handle heavy GPU tasks for object segmentation, frame overlay rendering, and FFmpeg-based HLS conversion. The modular backend allows easy swapping of weights, codecs, or models and ensures efficient distributed processing. This project demonstrates scalable video AI integration with practical deployment pipelines for multimedia analytics and streaming.
+          </div>
+        </article>
+
+        <!-- 6) Ball & Beam -->
+        <article class="card project-card" data-modal="p6">
+          <img class="thumb" src="proj-ball-beam.png" alt="Ball and Beam control thumbnail"/>
+          <h3>Modern Control — Ball &amp; Beam</h3>
+          <div class="meta">
+            <span class="chip year">2025</span>
+            <span class="chip">MATLAB</span><span class="chip">Simulink</span><span class="chip">State-Space</span>
+            <span class="chip">Observer</span><span class="chip">Pole Placement</span>
+          </div>
+          <p class="project-excerpt">I designed and implemented an observer-based control system for the classical Ball &amp; Beam experiment using MATLAB/Simulink…</p>
+          <div class="project-actions">
+            <button class="btn open-modal" data-target="p6"><i class="fa-regular fa-file-lines"></i> Case Study</button>
+            <a class="btn" href="https://github.com/Amirhosseinpoor/ControlModern" target="_blank"><i class="fa-brands fa-github"></i> Read More</a>
+          </div>
+          <div class="sr-only" id="p6-content">
+            I designed and implemented a complete observer-based control system for the classical Ball & Beam experiment using MATLAB and Simulink. Starting from the nonlinear Lagrangian model, I derived and validated the system’s dynamics through both analytical ODEs and Simulink simulations. The model was linearized around its equilibrium, and controllability and observability were verified using rank, PBH, and Jordan tests. A full state-feedback controller was then designed via pole placement to meet time-domain performance criteria (settling time &lt; 3 s, overshoot &lt; 5%), followed by the inclusion of a reference pre-compensator and an integral controller to eliminate steady-state error. Finally, a reduced-order Luenberger observer was designed to estimate unmeasured states, and the integrated observer–controller was tested on the nonlinear system. The final closed-loop system achieved stable, precise tracking and validated the Separation Principle in practice.
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+      <h2>Work & Teaching</h2>
+      <div class="grid">
+        <div class="card">
           <h3>AI Software Engineer — <a href="https://aras.kntu.ac.ir/" target="_blank" rel="noreferrer">ARAS</a></h3>
-          <p>ARAS at K. N. Toosi University is a leading research lab in robotics and automation, focusing on areas like autonomous systems, medical robotics, and intelligent control. It combines cutting-edge research with hands-on education, mentoring students and professionals through projects, workshops, and collaborations.</p>
+          <p>ARAS at K. N. Toosi University is a leading research lab in robotics and automation, focusing on autonomous systems, medical robotics, and intelligent control.</p>
           <div class="meta"><span class="chip year">2024</span></div>
         </div>
-        <div class="card reveal">
+        <div class="card">
           <h3>Teaching Assistant — KNTU</h3>
-          <div class="timeline">
-            <div class="tl-item"><strong>Electronics I</strong> — Sep 2024 — Feb 2025</div>
-            <div class="tl-item"><strong>Electronics II</strong> — Jan 2025 — Jun 2025</div>
-            <div class="tl-item"><strong>Differential Equations</strong> — Jan 2025 — Jun 2025</div>
-            <div class="tl-item"><strong>Systems & Signals</strong> — 2025</div>
-            <div class="tl-item"><strong>Linear Control</strong> — 2025</div>
-          </div>
+          <ul class="muted" style="margin-left:18px">
+            <li>Electronics I — Sep 2024 — Feb 2025</li>
+            <li>Electronics II — Jan 2025 — Jun 2025</li>
+            <li>Differential Equations — Jan 2025 — Jun 2025</li>
+            <li>Systems & Signals — 2025</li>
+            <li>Linear Control — 2025</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Skills -->
+    <!-- SKILLS -->
     <section id="skills">
-      <h2 class="reveal">Key Skills</h2>
-      <div class="card reveal">
-        <div class="skills" aria-label="skills">
-          <span class="chip">Python</span><span class="chip">C</span><span class="chip">MATLAB</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">scikit-learn</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Transformers</span><span class="chip">Hugging Face</span>
-          <span class="chip">LangChain</span><span class="chip">Agents</span><span class="chip">RAG</span><span class="chip">OpenCV</span><span class="chip">MediaPipe</span><span class="chip">MLP</span><span class="chip">SVM</span><span class="chip">Decision Trees</span><span class="chip">XGBoost</span><span class="chip">CNN</span><span class="chip">Fuzzy</span>
-          <span class="chip">Django</span><span class="chip">DRF</span><span class="chip">FastAPI</span><span class="chip">Celery</span><span class="chip">Redis</span>
-          <span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">FAISS</span><span class="chip">Chroma</span><span class="chip">Docker</span><span class="chip">GCP</span><span class="chip">Linux</span><span class="chip">Git</span><span class="chip">Html</span>
+      <h2>Key Skills</h2>
+      <div class="card">
+        <div class="meta" aria-label="skills">
+          <span class="chip">Python</span><span class="chip">C</span><span class="chip">MATLAB</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">scikit-learn</span><span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Transformers</span><span class="chip">LangChain</span><span class="chip">Agents</span><span class="chip">RAG</span><span class="chip">OpenCV</span><span class="chip">MediaPipe</span><span class="chip">SVM</span><span class="chip">XGBoost</span><span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span><span class="chip">Redis</span><span class="chip">PostgreSQL</span><span class="chip">FAISS</span><span class="chip">Docker</span>
         </div>
       </div>
     </section>
 
-    <!-- Achievements -->
-    <section id="achievements">
-      <h2 class="reveal">Achievements & Languages</h2>
-      <div class="card reveal">
-        <ul>
-          <li>
-            <strong>
-              <a href="https://www.linkedin.com/in/amir-hossein-poor/details/certifications/?skipRedirect=true" target="_blank" rel="noopener noreferrer">
-                Sharif LLM Agents Hackathon (2025)
-              </a>:
-            </strong>
-            Ranked among the <strong>Top 12</strong> out of 132+ teams.
-          </li>
-          <li>
-            <strong>
-              <a href="https://www.linkedin.com/in/amir-hossein-poor/overlay/1755892423361/single-media-viewer/?type=IMAGE&profileId=ACoAAEZ8PQQBdG7ufXKGk1QpG7d3ny9qmPdIP5w&skipRedirect=true" target="_blank" rel="noopener noreferrer">
-                Dean’s List
-              </a>:
-            </strong>
-            Recognized for <strong>outstanding academic performance</strong> and consistent excellence.
-          </li>
-          <li><strong>Academic Distinction:</strong> Achieved <strong>Top-5 standing</strong> in a highly competitive cohort.</li>
-          <li><strong>National Entrance Exam:</strong> Secured <strong>Rank 826</strong>, placing in the <strong>top 1% nationwide</strong>.</li>
-          <li>
-            <strong>Professional Development:</strong> Completed 
-            <strong>Python/Django (Ista Academy, 52h)</strong> and 
-            <strong>LLM Engineering (Udemy, 18h, 2024)</strong> certifications.
-          </li>
-          <li>
-            <strong>Languages:</strong>  
-            Persian — Native/Bilingual · English — Full Professional Proficiency  
-            <span class="note">(TOEFL scheduled for October 25, 2025)</span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Contact -->
+    <!-- CONTACT -->
     <section id="contact">
-      <h2 class="reveal">Contact</h2>
-      <div class="card reveal">
+      <h2>Contact</h2>
+      <div class="card">
         <p>If you’re exploring collaborations or have an idea that needs an LLM backbone, let’s talk.</p>
-        <div class="quick">
+        <div class="project-actions">
           <a href="mailto:amirhosseinpoora6@gmail.com" class="btn"><i class="fa-solid fa-envelope"></i> amirhosseinpoora6@gmail.com</a>
           <a href="https://www.linkedin.com/in/amir-hossein-poor/" target="_blank" class="btn"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
           <a href="https://github.com/Amirhosseinpoor" target="_blank" class="btn"><i class="fa-brands fa-github"></i> GitHub</a>
@@ -518,48 +350,98 @@
     </section>
   </main>
 
+  <!-- ======= MODAL (single reusable) ======= -->
+  <div class="modal-backdrop" id="backdrop" aria-hidden="true"></div>
+  <div class="modal" aria-hidden="true" id="modalRoot">
+    <dialog id="projDialog" role="dialog" aria-modal="true" aria-labelledby="projTitle" aria-describedby="projDesc">
+      <div class="modal-header">
+        <div id="projTitle" class="modal-title">Title</div>
+        <div>
+          <button class="icon-btn" id="closeModal" aria-label="Close dialog (Esc)"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <img id="projImg" class="thumb" alt="">
+        <div class="meta" id="projChips"></div>
+        <p id="projDesc" style="margin-top:10px"></p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" id="projPrimary" href="#" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Source</a>
+      </div>
+    </dialog>
+  </div>
+
   <script>
-    // Intersection reveal
-    const io=new IntersectionObserver((e)=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.12});
-    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-
-    // PARTICLE SPARKLES
+    // ---- Modal logic (accessible, single instance reused) ----
     (function(){
-      const P=document.getElementById('particles');
-      const W=()=>Math.max(window.innerWidth,1200), H=()=>Math.max(window.innerHeight,700);
-      const spawn=(n=28)=>{for(let i=0;i<n;i++){const d=document.createElement('div');d.className='p';
-        d.style.left=Math.random()*W()+'px'; d.style.top=Math.random()*H()+'px';
-        d.style.setProperty('--tx',((Math.random()*2-1)*W()*0.6)+'px');
-        d.style.setProperty('--ty',((Math.random()*2-1)*H()*0.6)+'px');
-        d.style.setProperty('--s',(0.6+Math.random()*2).toString());
-        d.style.animationDuration=(12+Math.random()*28)+'s';
-        P.appendChild(d); setTimeout(()=>d.remove(),35000);}};
-      spawn(); setInterval(()=>spawn(6),2200);
-    })();
+      const modal = document.getElementById('projDialog');
+      const backdrop = document.getElementById('backdrop');
+      const root = document.getElementById('modalRoot');
+      const titleEl = document.getElementById('projTitle');
+      const imgEl = document.getElementById('projImg');
+      const chipsEl = document.getElementById('projChips');
+      const descEl = document.getElementById('projDesc');
+      const primaryBtn = document.getElementById('projPrimary');
+      const closeBtn = document.getElementById('closeModal');
+      let lastFocus = null;
 
-    // SPACE ORBITS (circulating particles)
-    (function(){
-      const P=document.getElementById('particles'); if(!P) return;
-      const rings=[{r:140,d:26},{r:220,d:34},{r:320,d:46},{r:460,d:62},{r:600,d:84}];
-      rings.forEach((cfg,i)=>{const o=document.createElement('div'); o.className='orbit';
-        o.style.setProperty('--r',cfg.r+'px'); o.style.setProperty('--d',cfg.d+'s');
-        const n=1+(i%3); for(let k=0;k<n;k++){const s=document.createElement('div'); s.className='sat';
-          const angle=Math.random()*360; s.style.transform=`rotate(${angle}deg) translateX(${cfg.r/2}px)`; o.appendChild(s);} P.appendChild(o);
-      });
-    })();
+      function openModal(fromCard){
+        lastFocus = document.activeElement;
 
-    // Expand/collapse long project descriptions (texts unchanged)
-    document.querySelectorAll('.toggle-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const id = btn.getAttribute('data-toggle');
-        const desc = document.querySelector(`.proj-desc[data-id="${id}"]`);
-        if(!desc) return;
-        const expanded = desc.classList.toggle('expanded');
-        if(expanded){ desc.classList.remove('fade-tail'); btn.textContent='Show less'; }
-        else{ desc.classList.add('fade-tail'); btn.textContent='Read more'; }
+        // populate
+        const h3 = fromCard.querySelector('h3');
+        const img = fromCard.querySelector('img.thumb');
+        const chips = fromCard.querySelectorAll('.meta .chip');
+        const contentId = fromCard.querySelector('.open-modal').dataset.target + '-content';
+        const fullText = document.getElementById(contentId).textContent.trim();
+        const primaryLink = fromCard.querySelector('.project-actions a.btn');
+
+        titleEl.textContent = h3.textContent;
+        imgEl.src = img.src; imgEl.alt = img.alt;
+        chipsEl.innerHTML = ''; chips.forEach(c=>{ const s=document.createElement('span'); s.className='chip'; s.textContent=c.textContent; chipsEl.appendChild(s); });
+        descEl.textContent = fullText;
+        if(primaryLink){ primaryBtn.href = primaryLink.href; primaryBtn.innerHTML = '<i class="fa-solid fa-arrow-up-right-from-square"></i> Read More'; }
+
+        backdrop.setAttribute('aria-hidden','false');
+        root.setAttribute('aria-hidden','false');
+        modal.showModal();
+
+        // focus handling
+        closeBtn.focus();
+        document.addEventListener('keydown', escClose);
+        document.addEventListener('keydown', trapFocus);
+      }
+
+      function closeModal(){
+        modal.close();
+        backdrop.setAttribute('aria-hidden','true');
+        root.setAttribute('aria-hidden','true');
+        document.removeEventListener('keydown', escClose);
+        document.removeEventListener('keydown', trapFocus);
+        if(lastFocus) lastFocus.focus();
+      }
+
+      function escClose(e){ if(e.key==='Escape') closeModal(); }
+
+      function trapFocus(e){
+        if(e.key!=='Tab') return;
+        const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const f = Array.from(focusable).filter(el=>!el.hasAttribute('disabled'));
+        if(!f.length) return;
+        const first = f[0], last = f[f.length-1];
+        if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+      }
+
+      document.querySelectorAll('.open-modal').forEach(btn=>{
+        btn.addEventListener('click', (ev)=>{
+          const card = ev.currentTarget.closest('.project-card');
+          openModal(card);
+        });
       });
-    });
+      closeBtn.addEventListener('click', closeModal);
+      backdrop.addEventListener('click', closeModal);
+    })();
   </script>
 </body>
 </html>
-
