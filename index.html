@@ -368,7 +368,31 @@
           <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
 
-        <article class="card reveal">
+
+              <article class="card reveal">
+  <img class="thumb" src="proj-fashionmnist.png" alt="Fashion-MNIST Classifier thumbnail"/>
+  <h3>Fashion-MNIST Classifier</h3>
+  <div class="meta">
+    <span class="chip year">2025</span>
+    <span class="chip">PyTorch</span><span class="chip">CNN</span><span class="chip">MLP</span>
+    <span class="chip">AdamW</span><span class="chip">OneCycleLR</span>
+    <span class="chip">Stratified Split</span><span class="chip">Macro-F1</span>
+    <span class="chip">Augmentation</span><span class="chip">Confusion Matrix</span>
+  </div>
+  <p class="proj-desc">
+    A clean PyTorch pipeline for Fashion-MNIST with stratified 80/10/10 splits and train-only normalization to avoid leakage. 
+    Includes configurable MLP and CNN baselines, label smoothing, BatchNorm/Dropout, gradient clipping, and AdamW + OneCycleLR. 
+    Early stopping monitors validation Macro-F1, and rich diagnostics (confusion matrices, per-class precision/recall/F1, 
+    learning curves, misclassifications, and confidence distributions) make model behavior easy to analyze and iterate.
+  </p>
+  <div class="card-actions">
+    <a class="btn" href="https://github.com/Amirhosseinpoor/FashionMnist/" target="_blank" rel="noopener">
+      <i class="fa-brands fa-github"></i> GitHub Repo
+    </a>
+  </div>
+  <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+</article>
+                <article class="card reveal">
           <img class="thumb" src="proj-ball-beam.png" alt="Ball and Beam control thumbnail"/>
           <h3>Modern Control — Ball &amp; Beam</h3>
           <div class="meta">
@@ -390,6 +414,31 @@
           </div>
           <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
+<article class="card reveal">
+  <img class="thumb" src="proj-linear-control.png" alt="Linear Control Final Project thumbnail"/>
+  <h3>Linear Control — Final Project</h3>
+  <div class="meta">
+    <span class="chip year">2025</span>
+    <span class="chip">MATLAB</span><span class="chip">Frequency Response</span>
+    <span class="chip">Bode</span><span class="chip">Nyquist</span><span class="chip">Root Locus</span>
+    <span class="chip">Routh–Hurwitz</span><span class="chip">PID Design</span>
+    <span class="chip">Lead–Lag Compensation</span><span class="chip">Control Theory</span>
+  </div>
+  <p class="proj-desc">
+    This project applied classical control techniques to design and analyze controllers for a given frequency-response system. 
+    The workflow involved identifying the system’s type, order, and delay from frequency data and fitting an appropriate transfer function. 
+    Stability and performance were evaluated using Routh–Hurwitz, Bode, Nyquist, and root-locus methods. 
+    P, PI, PD, and lead–lag controllers were designed and tuned to meet overshoot, settling time, and steady-state error targets. 
+    MATLAB simulations compared the controlled and open-loop responses, verifying that the final closed-loop system achieved all transient and steady-state performance criteria.
+  </p>
+  <div class="card-actions">
+    <a class="btn" href="#" target="_blank" rel="noopener">
+      <i class="fa-solid fa-diagram-project"></i> Report (optional)
+    </a>
+  </div>
+  <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+</article>
+
 
       </div>
     </section>
@@ -603,3 +652,4 @@
   </script>
 </body>
 </html>
+
