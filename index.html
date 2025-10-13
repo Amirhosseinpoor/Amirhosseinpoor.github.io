@@ -438,6 +438,34 @@
   </div>
   <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
 </article>
+              <article class="card reveal">
+  <img class="thumb" src="proj-ibanist.png" alt="IBAN Converter & Validator thumbnail"/>
+  <h3>IBAN Converter &amp; Validator (Iran)</h3>
+  <div class="meta">
+    <span class="chip year">2025</span>
+    <span class="chip">Django</span><span class="chip">Python</span>
+    <span class="chip">IBAN (Sheba)</span><span class="chip">Mod-97</span>
+    <span class="chip">BBAN Rules</span><span class="chip">Regex</span>
+    <span class="chip">Server-Rendered Forms</span>
+  </div>
+  <p class="proj-desc">
+    A lightweight Django web app that converts Iranian bank account numbers to IBAN (Sheba) and back, with full validation.
+    The core <code>Ibanist</code> engine normalizes inputs, maps bank prefixes, and applies bank-specific BBAN formatting for major banks
+    (Keshavarzi, Tejarat, Refah, Saderat, Parsian, Mehr Iran, Meli, Melat, Sepah). It computes ISO-13616 check digits using the standard
+    mod-97 procedure and rejects malformed inputs by returning explicit <em>invalid</em> fields. Views support both
+    “account&nbsp;→&nbsp;IBAN” and “IBAN&nbsp;→&nbsp;account” flows, with simple templates (including per-bank pages) for a clean UX.
+    The implementation favors clarity and reliability: input sanitization, deterministic parsing/building, and consistent outputs for
+    <code>iban</code>, <code>bank</code>, and <code>an</code> (account number).
+  </p>
+  <div class="card-actions">
+    <!-- Replace the href with your repository/docs link -->
+    <a class="btn" href="https://github.com/Amirhosseinpoor/ibanist-django" target="_blank" rel="noopener">
+      <i class="fa-brands fa-github"></i> GitHub Repo
+    </a>
+  </div>
+  <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+</article>
+
 
 
       </div>
@@ -652,6 +680,7 @@
   </script>
 </body>
 </html>
+
 
 
 
