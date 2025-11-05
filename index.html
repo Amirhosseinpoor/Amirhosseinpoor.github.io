@@ -345,6 +345,30 @@ We developed an AI assistant that automates and enhances feedback in cataract su
           <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
         </article>
         <article class="card reveal">
+  <img class="thumb" src="proj-sparse-dense.png" alt="Sparse vs. Dense RAG on SciFact thumbnail"/>
+  <h3>R2L Lab — Sparse vs. Dense Retrieval on SciFact</h3>
+  <div class="meta">
+    <span class="chip year">2025</span>
+    <span class="chip">RAG</span><span class="chip">BM25</span><span class="chip">FAISS</span>
+    <span class="chip">Sentence-Transformers</span><span class="chip">BEIR</span>
+    <span class="chip">Python</span>
+  </div>
+  <ul class="proj-desc">
+    <li>Head-to-head comparison of BM25 (sparse) vs. Sentence-Transformers + FAISS (dense) on BEIR’s <em>SciFact</em>.</li>
+    <li>BM25 tuned via small grid search; best config <strong>k1 = 0.95</strong>, <strong>b = 0.95</strong>.</li>
+    <li>Findings: BM25 leads on ranking quality (NDCG/MAP); dense wins on coverage (Recall@100) and slightly on P@k.</li>
+    <li>Interpretation: lexical signals (titles/terms) suit scientific claims; dense broadens semantic matches—ideal when a reranker follows.</li>
+    <li>Stack: reproducible scripts for indexing, retrieval, and evaluation (BEIR), with clean CLI entry points.</li>
+  </ul>
+  <div class="card-actions">
+    <a class="btn" href="https://github.com/Amirhosseinpoor/Sparse-RAG-VS-Dense-RAG" target="_blank" rel="noopener">
+      <i class="fa-brands fa-github"></i> GitHub Repo
+    </a>
+  </div>
+  <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+</article>
+
+        <article class="card reveal">
   <img class="thumb" src="proj-sms-spam.png" alt="SMS Spam Detector thumbnail"/>
   <h3>SMS Spam Detector</h3>
   <div class="meta">
@@ -753,6 +777,7 @@ At ARAS (K. N. Toosi University), I joined as a software engineer building produ
   </script>
 </body>
 </html>
+
 
 
 
