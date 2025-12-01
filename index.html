@@ -258,27 +258,64 @@
 
         <!-- Cards (unchanged content) -->
         <article class="card reveal">
-          <img class="thumb" src="proj-occupational-medicine.jpg" alt="Occupational Medicine Platform thumbnail"/>
-          <h3>Occupational Medicine Platform</h3>
-          <div class="meta">
-            <span class="chip year">2025</span>
-            <span class="chip">VLM</span><span class="chip">OCR</span><span class="chip">LLM</span>
-            <span class="chip">Multi-Agent</span><span class="chip">Corrective RAG</span><span class="chip">LangChain</span><span class="chip">LangGraph</span>
-            <span class="chip">SVM</span><span class="chip">XGBoost</span><span class="chip">MLP</span><span class="chip">Decision Trees</span><span class="chip">Random Forest</span>
-            <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
-            <span class="chip">PostgreSQL</span><span class="chip">FAISS</span><span class="chip">Docker</span><span class="chip">Web Scrapping</span><span class="chip">Beautiful Soup</span><span class="chip">Selenium</span>
-            <span class="chip">Gamification</span>
-          </div>
-          <p class="proj-desc">
-            I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report. Employees and physicians submit digital forms and lab PDFs; a VLM+OCR module (Beagle-14B) extracts biomarkers and normalizes them to JSON, which an orchestrator LLM routes to task-specific predictors (SVM, XGBoost, MLP) for risks such as hypertension, diabetes, CVD, and anemia. The resulting profile triggers two agents: one maps conditions to specialties and crawls verified physician directories to surface nearby, insurance-compatible referrals; the other consults a curated pharmacology knowledge base and checks online/local availability. A reporter agent uses RAG over a FAISS vector store plus just-in-time web context to generate an evidence-backed report that explains findings, flags thresholds, and recommends next steps. The system runs on Django (RBAC, PostgreSQL) and FastAPI services, with Celery/Redis for async pipelines and Docker for reproducible deployment—designed for accuracy, traceability, and scalable clinic operations.
-          </p>
-          <div class="card-actions">
-            <a class="btn" href="https://docs.google.com/document/d/111ijh2_R-R2rszDmvnnnFNfP9ARWAPe5zgTvRYva-dA/edit?usp=sharing" target="_blank">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Project Docs
-            </a>
-          </div>
-          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
-        </article>
+  <img class="thumb" src="proj-occupational-medicine.jpg" alt="Occupational Medicine Platform thumbnail"/>
+  <h3>Occupational Medicine Platform</h3>
+  <div class="meta">
+    <span class="chip year">2025</span>
+    <span class="chip">VLM</span><span class="chip">OCR</span><span class="chip">LLM</span>
+    <span class="chip">Multi-Agent</span><span class="chip">Corrective RAG</span>
+    <span class="chip">Hybrid RAG</span><span class="chip">BM25</span><span class="chip">SPLADE</span>
+    <span class="chip">Cross-Encoder</span><span class="chip">HNSW</span><span class="chip">FAISS</span>
+    <span class="chip">LangChain</span><span class="chip">LangGraph</span>
+    <span class="chip">SVM</span><span class="chip">XGBoost</span><span class="chip">MLP</span>
+    <span class="chip">Decision Trees</span><span class="chip">Random Forest</span>
+    <span class="chip">Django</span><span class="chip">FastAPI</span><span class="chip">Celery</span>
+    <span class="chip">PostgreSQL</span><span class="chip">Docker</span>
+    <span class="chip">Web Scrapping</span><span class="chip">Beautiful Soup</span><span class="chip">Selenium</span>
+    <span class="chip">Gamification</span>
+  </div>
+  <p class="proj-desc">
+    I built an end-to-end occupational-health platform that turns messy clinic inputs into a structured, clinician-ready report. Employees and physicians submit digital forms and lab PDFs; a VLM+OCR module (Beagle-14B) extracts biomarkers and normalizes them to JSON, which an orchestrator LLM routes to task-specific predictors (SVM, XGBoost, MLP) for risks such as hypertension, diabetes, CVD, and anemia. 
+    The system includes a dedicated retrieval stack: a hybrid retriever (BM25 + SPLADE) provides initial candidates, a Cross-Encoder reranker refines relevance, and an HNSW index enables fast similarity search over clinical documents and pharmacology notes. 
+    These retrieval outputs feed two cooperating agents—one maps conditions to specialties and crawls verified physician directories to surface nearby, insurance-compatible referrals; the other consults a curated pharmacology knowledge base and checks online/local availability. 
+    Finally, a reporter agent uses corrective RAG over the FAISS store plus just-in-time web context to generate an evidence-backed report that explains findings, flags thresholds, and recommends next steps. The system runs on Django (RBAC, PostgreSQL) and FastAPI services, with Celery/Redis for async pipelines and Docker for reproducible deployment—designed for accuracy, traceability, and scalable clinic operations.
+  </p>
+  <div class="card-actions">
+    <a class="btn" href="https://docs.google.com/document/d/111ijh2_R-R2rszDmvnnnFNfP9ARWAPe5zgTvRYva-dA/edit?usp=sharing" target="_blank">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i> Project Docs
+    </a>
+  </div>
+  <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+</article>
+<article class="card reveal">
+  <img class="thumb" src="proj-rop.jpg" alt="ROP Diagnostic thumbnail"/>
+  <h3>ROP Diagnostic Web App</h3>
+  <div class="meta">
+    <span class="chip year">2024</span>
+    <span class="chip">U-Net++</span><span class="chip">EfficientNet-B6</span><span class="chip">EfficientNet-B4</span>
+    <span class="chip">Segmentation</span><span class="chip">Classification</span>
+    <span class="chip">Agent-based RAG</span><span class="chip">Hybrid RAG</span>
+    <span class="chip">Information Retrieval</span>
+    <span class="chip">Llama-3 (Local)</span><span class="chip">FAISS</span>
+    <span class="chip">MAP</span><span class="chip">nDCG</span>
+    <span class="chip">Explainable AI</span>
+    <span class="chip">Decision Layer</span>
+    <span class="chip">Django</span><span class="chip">FastAPI</span>
+    <span class="chip">PostgreSQL</span><span class="chip">Docker</span>
+  </div>
+  <p class="proj-desc">
+    I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations. Fundus images are processed by a U-Net++ vessel segmentation network (ResNet-18 encoder) followed by three CNN heads: EfficientNet-B4 for Plus disease, EfficientNet-B6 for a 7-class stage classifier, and EfficientNet-B4 for zone estimation. The outputs feed a rule-based decision layer that maps findings to observation or treatment bands.  
+    On top of this, an agent-based RAG workflow combines hybrid retrieval over a curated ophthalmology corpus in FAISS with search-indexed guideline data, allowing a local Llama 3 model (served via Ollama) to generate cited, transparent clinical explanations. Retrieval behaviour is evaluated using standard IR metrics such as MAP and nDCG to monitor and improve the quality of the generated evidence and recommendations.  
+    The system runs on a modular Django + FastAPI backend with PostgreSQL and Docker, designed for accuracy, interpretability, and practical clinical deployment.
+  </p>
+  <div class="card-actions">
+    <a class="btn" href="https://docs.google.com/document/d/1SSc-_QHBRh611wSVSCWC5q2S5r3POsPiid-YWUOPjI4/edit?usp=sharing" target="_blank">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i> Project Docs
+    </a>
+  </div>
+  <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
+</article>
+
       <article class="card reveal">
   <img class="thumb" src="proj-surginote.png" alt="SurgiNote — Cataract Surgery Training Assistant thumbnail"/>
   <h3>SurgiNote — Cataract Surgery Training Assistant</h3>
@@ -300,28 +337,7 @@ We developed an AI assistant that automates and enhances feedback in cataract su
   <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
 </article>
 
-        <article class="card reveal">
-          <img class="thumb" src="proj-rop.jpg" alt="ROP Diagnostic thumbnail"/>
-          <h3>ROP Diagnostic Web App</h3>
-          <div class="meta">
-            <span class="chip year">2024</span>
-            <span class="chip">U-Net++</span><span class="chip">EfficientNet-B6</span><span class="chip">EfficientNet-B4</span>
-            <span class="chip">Segmentation</span><span class="chip">Classification</span><span class="chip">RAG</span>
-            <span class="chip">Llama-3 (Local)</span><span class="chip">FAISS</span><span class="chip">Explainable AI</span>
-            <span class="chip">Decision Layer</span><span class="chip">Django</span><span class="chip">FastAPI</span>
-            <span class="chip">PostgreSQL</span><span class="chip">Docker</span>
-          </div>
-          <p class="proj-desc">
-            I built a two-stage AI platform for ROP screening that combines deep vision models with knowledge-grounded clinical explanations. Fundus images are processed by a U-Net++ vessel segmentation network (ResNet-18 encoder) followed by three CNN heads: EfficientNet-B4 for Plus disease, EfficientNet-B6 for a 7-class stage classifier, and EfficientNet-B4 for zone estimation. The outputs feed a rule-based decision layer that maps findings to observation or treatment bands. A local Llama 3 model (served via Ollama) employs a RAG framework over a curated ophthalmology corpus stored in FAISS to generate cited, transparent clinical explanations. The system runs on a modular Django + FastAPI backend with PostgreSQL and Docker, designed for accuracy, interpretability, and practical clinical deployment.
-          </p>
-          <div class="card-actions">
-            <a class="btn" href="https://docs.google.com/document/d/1SSc-_QHBRh611wSVSCWC5q2S5r3POsPiid-YWUOPjI4/edit?usp=sharing" target="_blank">
-              <i class="fa-solid fa-arrow-up-right-from-square"></i> Project Docs
-            </a>
-          </div>
-          <div class="chev" title="Read in modal" aria-hidden="true"><i class="fa-solid fa-chevron-down"></i></div>
-        </article>
-
+        
         <article class="card reveal">
           <img class="thumb" src="proj-speech-motor.png" alt="Speech Driven Motor Control thumbnail"/>
           <h3>Speech-Driven Motor Control</h3>
@@ -578,9 +594,13 @@ At ARAS (K. N. Toosi University), I joined as a software engineer building produ
       <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">Keras</span>
       <span class="chip">Transformers</span><span class="chip">Hugging Face</span>
 
-      <!-- LLMs & Agents -->
-      <span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">Agents</span>
-      <span class="chip">RAG</span><span class="chip">Hybrid, Corrective, and Agent RAG</span><span class="chip">Sparse Retrieval(BM25)</span><span class="chip">Dense Retrieval(Splade)</span><span class="chip">Prompt Engineering</span>
+<!-- LLMs, Agents & Retrieval -->
+<span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">Agents</span>
+<span class="chip">RAG</span><span class="chip">Hybrid RAG</span><span class="chip">Corrective RAG</span><span class="chip">Agent RAG</span>
+<span class="chip">Sparse Retrieval (BM25)</span><span class="chip">Dense Retrieval (Bi-Encoders)</span>
+<span class="chip">SPLADE</span><span class="chip">Cross-Encoders</span>
+<span class="chip">ANN</span><span class="chip">HNSW</span><span class="chip">IVF</span>
+<span class="chip">Prompt Engineering</span>
 
       <!-- Computer Vision -->
       <span class="chip">OpenCV</span><span class="chip">MediaPipe</span><span class="chip">CNN</span>
@@ -778,6 +798,7 @@ At ARAS (K. N. Toosi University), I joined as a software engineer building produ
   </script>
 </body>
 </html>
+
 
 
 
